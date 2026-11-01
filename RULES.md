@@ -21,3 +21,9 @@
 - **Direct Implementation & Reconstruction**: Leverage any public GitHub repository, open-source library, or decompilation/inspection capability (including REA tools) to understand and implement desired features without waiting for instructions on technical steps.
 - **Vibe-Coding Flow**: Translate aesthetic, functional, and structural requirements into working code immediately. Run tests, verify execution, and maintain clean Git hygiene.
 - **Commit & Sync**: Keep all codebase milestones anchored cleanly to `https://github.com/josephithomas/jit`.
+
+## 5. TokenEconomizer Discipline
+- **Micro-Skill Retention**: Reuse known repository facts (test runners, build pipelines, entrypoints) rather than repeatedly re-probing the workspace.
+- **Bounded Reads & Tool Precision**: Inspect only specific line ranges and targeted symbols; never dump thousands of unnecessary lines into the prompt context.
+- **Loop Guard**: Proactively catch and abort failure loops; pivot strategies after a failed attempt rather than cycling identical commands.
+- **High-Signal Conciseness**: Zero fluff or repetitive output echoes. Maximize token density for productive code and verification.
