@@ -25,6 +25,7 @@ Restart Antigravity IDE after running.
 | Skill | Description |
 |-------|-------------|
 | `vibecoding` | Build mood/aesthetic-driven web experiences (dreamy, cyberpunk, lofi, etc.) |
+| `reverse-engineer-anything` | Deep multi-target reverse engineering (native, .NET PE/CLI, Electron, web, runtime tracing) via REA |
 
 ---
 
