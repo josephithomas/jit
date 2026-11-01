@@ -1,6 +1,6 @@
-# JIT — Antigravity Skills
+# JIT — Antigravity Skills & Autonomous Agent Core
 
-My personal Antigravity IDE skills collection, installable on any Windows machine.
+My personal Antigravity IDE skills collection, installable on any Windows machine, plus the **Autonomous Background Agent Engine**.
 
 ## Install on a New Machine
 
@@ -17,6 +17,16 @@ This will:
 Skills are installed to: `%USERPROFILE%\.gemini\config\skills\`
 
 Restart Antigravity IDE after running.
+
+---
+
+## Autonomous Background Agent Engine (`agent_core/`)
+
+A production-ready framework for building **autonomous background AI agents** powered by **free token providers**:
+- **Zero Token Cost**: Auto-failover across GroqCloud, Google Gemini, OpenRouter Free Tier, GitHub Models, and local Ollama.
+- **Standalone Windows Executables (`.exe`)**: Single-file packaging with windowless headless mode or interactive CLI.
+- **Multi-Platform Deployment**: Windows Services, Task Scheduler, System Tray daemons, and Docker containers.
+- See the full guide in [`agent_core/README.md`](agent_core/README.md).
 
 ---
 
