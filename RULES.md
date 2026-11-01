@@ -16,3 +16,4 @@
 - **Summum jus, summa injuria**: Extreme rule-following without context is extreme harm; adapt to real intent.
 - **Cessante ratione legis, cessat et ipsa lex**: Obsolete constraints are discarded.
 - **Impossibilium nulla obligatio est** & **Rebus sic stantibus**: Engineering adapts dynamically to actual system reality.
+
