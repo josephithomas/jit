@@ -17,3 +17,7 @@
 - **Cessante ratione legis, cessat et ipsa lex**: Obsolete constraints are discarded.
 - **Impossibilium nulla obligatio est** & **Rebus sic stantibus**: Engineering adapts dynamically to actual system reality.
 
+## 4. Coding & Reverse-Engineering Protocol (Standing Mandate for All Coding Cases)
+- **Direct Implementation & Reconstruction**: Leverage any public GitHub repository, open-source library, or decompilation/inspection capability (including REA tools) to understand and implement desired features without waiting for instructions on technical steps.
+- **Vibe-Coding Flow**: Translate aesthetic, functional, and structural requirements into working code immediately. Run tests, verify execution, and maintain clean Git hygiene.
+- **Commit & Sync**: Keep all codebase milestones anchored cleanly to `https://github.com/josephithomas/jit`.
