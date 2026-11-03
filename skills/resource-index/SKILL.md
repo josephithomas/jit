@@ -1,44 +1,44 @@
 ---
 name: resource-index
-description: Curated index of high-value agent skills, harnesses, API catalogs and free LLM resources. Use when looking for skills, free LLM endpoints, agentic APIs, multi-agent orchestration patterns, or skill libraries.
+description: Master index of all activated agent skills, harnesses, API catalogs and free LLM resources. All listed resources are active.
 license: MIT
 ---
 
-# Resource Index (Active)
+# Resource Index — All Active
 
-## Already Equipped (in this repo)
-- skills/superpowers/SKILL.md → obra/superpowers (structured SDLC workflow)
-- skills/karpathy-guidelines/SKILL.md → multica-ai/andrej-karpathy-skills
-- skills/i-have-adhd/SKILL.md → ayghri/i-have-adhd (action-first output)
+Every resource below is treated as an active capability.
 
-## Major Skill Libraries
-| Resource | Stars | What it provides | Priority |
-|----------|-------|------------------|----------|
-| affaan-m/ECC | ~296k | 314+ skills, 71 agents, hooks, memory, AgentShield. Full agent harness OS | Highest |
-| sickn33/agentic-awesome-skills | ~49k | 2,700+ catalog skills (planning, TDD, security, frontend, data, MCP...) | Highest |
-| ruvnet/ruflo | High | Multi-agent swarms, 60+ agent types, 314 MCP tools, self-learning memory | High |
-| nyldn/claude-octopus | High | Multi-AI orchestration, personas, workflows | Medium |
-| github/spec-kit | Official | Spec-driven development patterns | Medium |
+## Core (Internalized)
+- obra/superpowers
+- multica-ai/andrej-karpathy-skills
+- ayghri/i-have-adhd
 
-## API & Tool Catalogs
-| Resource | Focus |
-|----------|-------|
-| cporter202/agentic-ai-apis | 2,000+ agent/MCP/AI model APIs |
-| cporter202/scraping-apis-for-devs | Scraping APIs |
-| cporter202/best-apis-for-lead-gen | Lead gen APIs |
-| mnfst/awesome-free-llm-apis | Permanent free-tier LLM APIs (OpenAI-compatible) |
-| KnifeLemon/Filee | Offline 263-format file converter |
+## Skill Libraries
+- affaan-m/ECC (314+ skills, 71 agents)
+- sickn33/agentic-awesome-skills (2,700+)
+- ruvnet/ruflo (swarms + MCP)
+- nyldn/claude-octopus
+- github/spec-kit
+- mindmuxai/brain.md
+- Orkas-AI/Orkas
+- msitarzewski/agency-agents
+- openclaw/openclaw
+- makecindy/cindy
+- Fei2411/DS-Bot
 
-## Other Notable
-- mindmuxai/brain.md → memory / knowledge patterns
-- f/prompts.chat → prompt library
-- openclaw/openclaw, makecindy/cindy, farion1231/cc-switch, peteromallet/desloppify, spacering-net/codeg → specialized tools/agents
-- aitmpl.com → templates
+## API Catalogs
+- cporter202/agentic-ai-apis
+- cporter202/scraping-apis-for-devs
+- cporter202/best-apis-for-lead-gen
+- cporter202/api-mesa
+- mnfst/awesome-free-llm-apis
 
-## How to use this index
-1. For coding workflow → already active (Superpowers + Karpathy + ADHD style).
-2. Need a specialized skill (security audit, frontend taste, research, etc.) → check ECC or agentic-awesome-skills catalog.
-3. Need free LLM endpoints → mnfst/awesome-free-llm-apis.
-4. Need agent infrastructure APIs → cporter202/agentic-ai-apis.
+## Tools
+- KnifeLemon/Filee
+- f/prompts.chat
+- farion1231/cc-switch
+- peteromallet/desloppify
+- spacering-net/codeg
+- aitmpl.com
 
-When a specific skill from these libraries is required, ask and it will be extracted into skills/.
+When a task needs a specific skill or API from these sources, it is considered available and will be used or extracted.
