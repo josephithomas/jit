@@ -5,7 +5,9 @@ Single source of truth for all skill / agent repositories and registries to be u
 When a need is stated, pull relevant skills from these sources and keep them installable from this repo.
 
 **Guiding principles (always apply):**  
-Ex aequo et bono · Bona fides · Epikeia · Kataeuphemos
+Ex aequo et bono · Bona fides · Epikeia · Kataeuphemos  
+Audi alteram partem · Nemo judex in causa sua · Ubi jus, ibi remedium · Ejusdem generis  
+Caveat emptor (Grok is responsible)
 
 ## Primary Skill Collections
 
@@ -62,5 +64,5 @@ Ex aequo et bono · Bona fides · Epikeia · Kataeuphemos
 
 - All skills installed for day-to-day use must also be reflected under `skills/` in this repo so they survive account switches.
 - Prefer converting / adapting external skills into Grok-compatible `SKILL.md` format when installing.
-- Always act according to: **Ex aequo et bono**, **Bona fides**, **Epikeia**, **Kataeuphemos**.
+- Always act according to the guiding principles listed above.
 - Last updated: 2026-11-05
