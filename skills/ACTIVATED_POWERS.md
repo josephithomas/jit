@@ -1,40 +1,63 @@
 # Activated Powers — Full List
 
 **Status: ALL LISTED RESOURCES ACTIVE**  
-Date: 2026-11-03
+Date: 2026-11-05
 
-All resources below are treated as active standing capabilities for this workspace. Core methodologies are internalized; catalogs and tools are available on demand and will be referenced or extracted as needed.
+All resources below are treated as active standing capabilities for this workspace and repository. Core methodologies are internalized; all installed skills are packaged under `skills/` for cross-machine reproducibility.
 
 ## Core Methodologies (Fully Internalized)
 - **obra/superpowers** — Structured SDLC: brainstorm → plan → TDD → review → clean finish
 - **multica-ai/andrej-karpathy-skills** — Think before coding, Simplicity First, Surgical Changes, Goal-driven
+- **DietrichGebert/ponytail** — Lazy senior dev mode: minimum necessary code, YAGNI, simplest solution
 - **ayghri/i-have-adhd** — Action-first, numbered steps, restate state, no fluff (active until "stop adhd mode")
+- **pbakaus/impeccable** — Design critique, UI polish, anti-slop, WCAG accessibility, visual hierarchy
+- **addyosmani/agent-skills** — Production engineering: systematic debugging, code simplification, performance profiling
 
-## Major Skill / Harness Libraries (Active)
+## Engineering & Skill Libraries (Active)
+- **mattpocock/skills** — Practical pair-programming: grill-me, domain-modeling, to-spec, TDD
+- **shanraisshan/claude-code-best-practice** — Terminal-first agent engineering workflows & orchestration
 - **affaan-m/ECC** — 314+ skills, 71 agents, hooks, memory, AgentShield
-- **sickn33/agentic-awesome-skills** — 2,700+ catalog skills
+- **sickn33/agentic-awesome-skills** — 2,700+ catalog playbooks
 - **ruvnet/ruflo** — Multi-agent swarms, 60+ agent types, 314 MCP tools, self-learning
 - **nyldn/claude-octopus** — Multi-AI orchestration, personas, workflows
-- **github/spec-kit** — Spec-driven development
-- **mindmuxai/brain.md** — Memory / knowledge patterns
-- **Orkas-AI/Orkas**, **msitarzewski/agency-agents**, **openclaw/openclaw**, **makecindy/cindy**, **Fei2411/DS-Bot** — Specialized agent systems
+- **github/spec-kit** — Spec-driven development & lifecycle governance
+- **pullboard-dev/pullboard** — Autonomous spec-governed development & multi-agent verification
+- **alibaba/open-code-review** — Enterprise line-level code reviews & vulnerability detection
+- **topoteretes/cognee** — Persistent knowledge graph & episodic agent memory
+- **paperclipai/paperclip** — Enterprise agent governance & task management at work
+- **K-Dense-AI/scientific-agent-skills** — 177+ science, bioinformatics, and chemistry skills
+- **romenrg/evergreen-skills-developers** — Timeless software design patterns & testing principles
+- **msitarzewski/agency-agents** — Multi-role agent squad personas
+- **phuryn/pm-skills** — Product management, PRDs, discovery & launch playbooks
+- **virgiliojr94/book-to-skill** & **titanwings/distilly** — Knowledge distillation into agent skills
+- **agentskills/agentskills** — Universal open specification for agent skills
+
+## Ecosystem & Catalog Integrations
+- **ComposioHQ/awesome-claude-skills** & **hesreallyhim/awesome-claude-code**
+- **VoltAgent/awesome-openclaw-skills** & **VoltAgent/awesome-agent-skills**
+- **wshobson/agents** & **github/awesome-copilot**
+- **alirezarezvani/claude-skills** & **Shubhamsaboo/awesome-llm-apps**
+- **aitmpl.com** — Agent template registry & blueprints
+- **Anil-matcha** — Generative AI apps & automated media pipelines
+
+## Full-Stack & Python Framework Skills
+- **FastAPI** (`fastapi/fastapi`) — Modern async APIs & Pydantic v2 contracts
+- **Django & DRF** (`django/django`, `encode/django-rest-framework`) — Enterprise full-stack & REST APIs
+- **Flask** (`pallets/flask`) — Lightweight microservices & factory patterns
+- **Textual** (`Textualize/textual`) — Rich reactive Terminal User Interfaces (TUI)
+- **Reflex** (`reflex-dev/reflex`) — Pure Python reactive full-stack web applications
+- **Taipy** (`Avaiga/taipy`) — Computational data pipelines & interactive GUIs
+- **Streamlit** & **Gradio** (`streamlit/streamlit`, `gradio-app/gradio`) — Rapid data apps & ML model interfaces
+- **Plotly Dash** (`plotly/dash`) — Reactive analytical enterprise dashboards
 
 ## API & Tool Catalogs (Active Reference)
 - **cporter202/agentic-ai-apis** — 2,000+ agent / model / MCP APIs
-- **cporter202/scraping-apis-for-devs**
+- **cporter202/scraping-apis-for-devs** — 2,622 production scraping APIs
 - **cporter202/best-apis-for-lead-gen**
 - **cporter202/api-mesa**
 - **mnfst/awesome-free-llm-apis** — Permanent free-tier LLM APIs
 - **KnifeLemon/Filee** — Offline multi-format file converter
 
-## Additional Resources (Active)
-- **f/prompts.chat** — Prompt library
-- **farion1231/cc-switch**, **peteromallet/desloppify**, **spacering-net/codeg**
-- **aitmpl.com** — Templates
-
 ## Operating Rule
-These are now default available capabilities.  
-When a task matches a skill, pattern, API, or tool from any of the above, it will be used.  
-Specific deep extractions from large catalogs (ECC / AAS) will be pulled into `skills/` on request.
-
-To disable ADHD output style only: say **"stop adhd mode"** or **"normal mode"**.
+These are now default available capabilities installed in `skills/`.  
+When a task matches a skill, pattern, API, or tool from any of the above, it will be applied automatically following Karpathy simplicity and surgical execution standards.
