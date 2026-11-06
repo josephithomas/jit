@@ -1,0 +1,7 @@
+__pycache__/
+*.py[cod]
+*$py.class
+app_debug.log
+pw_test.txt
+.DS_Store
+Thumbs.db
