@@ -22,7 +22,52 @@ All agents built with this framework tap into generous, zero-cost API tiers with
 
 ---
 
-## 🏗️ 2. Core Framework Architecture
+## 🚀 2. Free Multi-Harness Coding Agents (via free-claude-code)
+
+For full **Claude Code**, **Codex**, **OpenCode**, **Cline**, **Pi**, **Aider**, **Antigravity**, **VS Code Chat**, and other coding harnesses running on free / low-cost providers, this project now officially integrates and recommends:
+
+**[Alishahryar1/free-claude-code](https://github.com/Alishahryar1/free-claude-code)** (FCC)
+
+### What free-claude-code adds
+
+- Routes any of **12+ supported harnesses** to models from **60+ providers** (free tiers, subscription, local, custom).
+- **1.3B+ free tokens** availability (subject to provider limits and TOS).
+- Native streaming, tool use, and interleaved thinking preserved.
+- Automatic retries, rate-limit handling, concurrency control, multi-key rotation, and model/provider fallback.
+- Works from terminal, desktop apps, IDE extensions, phone (Discord/Telegram + voice notes), and browser (native sessions).
+- Token optimization via RTK + Headroom.
+- Chat Completions ingress + native Gemini egress support.
+
+### Quick install (macOS / Linux)
+
+```bash
+curl -fsSL "https://raw.githubusercontent.com/Alishahryar1/free-claude-code/main/scripts/install.sh" | sh
+```
+
+### Quick install (Windows PowerShell)
+
+```powershell
+& ([scriptblock]::Create((irm "https://raw.githubusercontent.com/Alishahryar1/free-claude-code/main/scripts/install.ps1")))
+```
+
+After install, start the FCC server / tray app and configure a free provider (e.g. NVIDIA NIM, OpenRouter free models, or local). Then launch:
+
+```bash
+fcc-claude      # Claude Code
+fcc-codex       # Codex
+fcc-opencode    # OpenCode
+fcc-cline       # Cline
+fcc-pi          # Pi
+# ... and other harnesses
+```
+
+FCC is complementary to the built-in `FreeAIProviderRouter` in this repo:
+- Use **agent_core** free providers for lightweight background / custom agents.
+- Use **free-claude-code** when you need full-featured coding harnesses (Claude Code style tool loops, IDE integration, etc.) on free tokens.
+
+---
+
+## 🏗️ 3. Core Framework Architecture
 
 ```
 agent_core/
@@ -38,14 +83,15 @@ agent_core/
 ```
 
 ### Key Capabilities
-- **Automatic Fallback Routing**: If Groq hits a rate limit, the router immediately fails over to Gemini, then OpenRouter, then GitHub Models, then local Ollama. The agent never halts.
+- **Automatic Fallback Routing**: If Groq hits a rate limit, the router immediately fails over to Gemini, then OpenRouter, then GitHub Models, then local Ollama. The agent neverhalts.
 - **Persistent State**: Execution history, learned micro-skills, and goals are stored in local JSON/SQLite to survive reboots.
 - **Background Daemon Mode**: Runs in a separate daemon thread without blocking host applications or freezing the OS.
 - **Extensible Tool Registry**: Add custom file, network, OS, or calculation tools with a single line: `agent.register_tool(name, func)`.
+- **Multi-harness free coding** (via free-claude-code integration above).
 
 ---
 
-## 📦 3. Deployment Formats
+## 📦 4. Deployment Formats
 
 ### A. Standalone Windows Executable (`.exe`)
 Compile any background agent into a single, portable Windows binary:
@@ -75,7 +121,7 @@ Deploy the harness inside a minimal Python container with environment variables 
 
 ---
 
-## ⚡ 4. Quickstart Example
+## ⚡ 5. Quickstart Example
 
 ```python
 from agent_core.harness.agent_daemon import BackgroundAgent
