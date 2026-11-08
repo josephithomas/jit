@@ -1,0 +1,66 @@
+Titus SkillForge — Fixed + Installable Package
+==============================================
+
+This package contains everything needed to produce both:
+
+  1. A portable single-file EXE
+  2. A professional Windows Installer (Setup.exe)
+
+------------------------------------------------
+QUICK START — CREATE THE INSTALLER
+------------------------------------------------
+
+1. Copy all files from this package into your project folder:
+   D:\My Software Source Codes\universal-skill-creator\universal-skill-creator\
+
+2. (One-time) Install Inno Setup 6 if you want a proper installer:
+   https://jrsoftware.org/isinfo.php
+
+3. Double-click:
+
+      build_installer.bat
+
+4. Results:
+
+   • dist\TitusSkillForge.exe
+     → Portable version (just double-click to run)
+
+   • Output\TitusSkillForge-Setup-1.0.0.exe
+     → Windows Installer (give this to end users)
+
+------------------------------------------------
+WHAT THE INSTALLER PROVIDES
+------------------------------------------------
+
+• Standard Windows setup wizard
+• Choice of install location
+• Start Menu entry
+• Optional Desktop shortcut
+• Titus logo as application + installer icon
+• Clean uninstall from Windows Settings → Apps
+
+------------------------------------------------
+KEY FIXED / NEW FILES
+------------------------------------------------
+
+desktop_app.py      – fixed (logging & error handling)
+build_exe.bat       – builds the portable EXE only
+build_installer.bat – builds EXE + Windows Installer
+make_icon.py        – creates assets\icon.ico from the logo
+setup.iss           – Inno Setup script
+setup.nsi           – NSIS alternative script
+assets\             – logos
+static\index.html   – web UI (must stay inside static/)
+
+------------------------------------------------
+IF YOU ONLY WANT THE PORTABLE EXE
+------------------------------------------------
+
+Just run:
+
+    build_exe.bat
+
+or
+
+    python make_icon.py
+    build_exe.bat
