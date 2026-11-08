@@ -1,7 +1,7 @@
 # Activated Powers — Full List
 
 **Status: ALL LISTED RESOURCES ACTIVE**  
-Date: 2026-11-05
+Date: 2026-11-08
 
 All resources below are treated as active standing capabilities for this workspace and repository. Core methodologies are internalized; all installed skills are packaged under `skills/` for cross-machine reproducibility.
 
@@ -31,6 +31,9 @@ All resources below are treated as active standing capabilities for this workspa
 - **phuryn/pm-skills** — Product management, PRDs, discovery & launch playbooks
 - **virgiliojr94/book-to-skill** & **titanwings/distilly** — Knowledge distillation into agent skills
 - **agentskills/agentskills** — Universal open specification for agent skills
+
+## Coding Agent Infrastructure (Active)
+- **Alishahryar1/free-claude-code** — Local multi-provider proxy for Claude Code, Codex, Aider, Cline, Antigravity CLI, Grok Build and 8 other harnesses. Routes to 61 providers (large free tiers + paid + local). Automatic fallback, multi-key rotation, token optimization, Admin UI. Installed skill: `skills/free-claude-code/`.
 
 ## Ecosystem & Catalog Integrations
 - **ComposioHQ/awesome-claude-skills** & **hesreallyhim/awesome-claude-code**
