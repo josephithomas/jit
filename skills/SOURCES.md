@@ -38,6 +38,10 @@ Caveat emptor (Grok is responsible)
 - **paperclipai/paperclip** — Open-source app for managing agents at work.
 - **alibaba/open-code-review** — Battle-tested hybrid code-review tooling and pipelines.
 
+## Coding Agent Infrastructure
+
+- **Alishahryar1/free-claude-code** — Free Claude Code (FCC): local multi-provider proxy that routes Claude Code, Codex, Pi, OpenCode, Cline, Hermes, DeepSeek Harness, Grok Build, Muse Code, Aider, Antigravity CLI, and VS Code Chat to 61 providers (large free tiers + paid + local). Automatic fallback, multi-key rotation, Admin UI, token optimization. Skill installed at `skills/free-claude-code/`.
+
 ## Registries & Platforms
 
 - **aitmpl.com** — Claude Code Templates registry: installable skills, agents, commands, hooks, MCP configs.
@@ -65,4 +69,4 @@ Caveat emptor (Grok is responsible)
 - All skills installed for day-to-day use must also be reflected under `skills/` in this repo so they survive account switches.
 - Prefer converting / adapting external skills into Grok-compatible `SKILL.md` format when installing.
 - Always act according to the guiding principles listed above.
-- Last updated: 2026-11-05
+- Last updated: 2026-11-08
