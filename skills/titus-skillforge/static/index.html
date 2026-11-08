@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Titus SkillForge — Universal SKILL.md Creator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0b1220;
+      --bg-elevated: #111827;
+      --bg-card: #1a2332;
+      --border: #2a3648;
+      --border-focus: #38bdf8;
+      --text: #e2e8f0;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --accent: #0ea5e9;
+      --accent-hover: #0284c7;
+      --success: #22c55e;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --radius: 12px;
+      --shadow: 0 8px 30px rgba(0,0,0,0.35);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(180deg, #0f172a 0%, #0b1220 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(12px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-icon {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, #0ea5e9, #6366f1);
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      font-size: 18px;
+      color: white;
+      box-shadow: 0 4px 14px rgba(14, 165, 233, 0.35);
+    }
+
+    .brand h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .brand span {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: block;
+      margin-top: -2px;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    /* Layout */
+    .main {
+      max-width: 1480px;
+      margin: 0 auto;
+      padding: 24px 28px 60px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    @media (max-width: 1100px) {
+      .main { grid-template-columns: 1fr; }
+    }
+
+    /* Cards */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .card-header {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(15, 23, 42, 0.6);
+    }
+
+    .card-header h2 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-body { padding: 20px; }
+
+    /* Form elements */
+    label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    input[type="text"],
+    select,
+    textarea {
+      width: 100%;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.9rem;
+      padding: 10px 14px;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+    }
+
+    textarea {
+      min-height: 220px;
+      resize: vertical;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      line-height: 1.55;
+    }
+
+    #skillMarkdownOutput {
+      min-height: 420px;
+      background: #0d1520;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .form-group { margin-bottom: 14px; }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 16px;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.15s;
+      font-family: inherit;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #0ea5e9, #0284c7);
+      color: white;
+      box-shadow: 0 2px 10px rgba(14, 165, 233, 0.3);
+    }
+    .btn-primary:hover { background: linear-gradient(135deg, #0284c7, #0369a1); transform: translateY(-1px); }
+    .btn-primary:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+
+    .btn-secondary {
+      background: var(--bg-elevated);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover { background: #1e293b; border-color: #475569; }
+
+    .btn-success {
+      background: linear-gradient(135deg, #16a34a, #15803d);
+      color: white;
+    }
+    .btn-success:hover { filter: brightness(1.08); }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid transparent;
+    }
+    .btn-ghost:hover { color: var(--text); background: rgba(255,255,255,0.04); }
+
+    .btn-sm { padding: 6px 12px; font-size: 0.8rem; }
+
+    /* Upload zone */
+    .upload-zone {
+      border: 2px dashed var(--border);
+      border-radius: 10px;
+      padding: 28px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      margin-bottom: 16px;
+      background: rgba(14, 165, 233, 0.03);
+    }
+    .upload-zone:hover, .upload-zone.dragover {
+      border-color: var(--accent);
+      background: rgba(14, 165, 233, 0.08);
+    }
+    .upload-zone p { color: var(--text-muted); font-size: 0.9rem; }
+    .upload-zone strong { color: var(--accent); }
+
+    #fileUploadBadge {
+      display: none;
+      background: rgba(34, 197, 94, 0.15);
+      color: var(--success);
+      font-size: 0.8rem;
+      padding: 4px 10px;
+      border-radius: 20px;
+      margin-top: 8px;
+    }
+
+    /* Templates */
+    .templates {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .template-chip {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .template-chip:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(14, 165, 233, 0.08);
+    }
+
+    /* Validation panel */
+    .validation-panel {
+      margin-top: 16px;
+      padding: 14px 16px;
+      background: var(--bg-elevated);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      display: none;
+    }
+    .validation-panel.visible { display: block; }
+
+    .score-ring {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-right: 14px;
+    }
+    .score-high { background: rgba(34,197,94,0.15); color: var(--success); border: 2px solid var(--success); }
+    .score-mid  { background: rgba(245,158,11,0.15); color: var(--warning); border: 2px solid var(--warning); }
+    .score-low  { background: rgba(239,68,68,0.15); color: var(--danger); border: 2px solid var(--danger); }
+
+    .platform-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+    .platform-badge {
+      font-size: 0.75rem;
+      padding: 3px 9px;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+    .platform-ok { background: rgba(34,197,94,0.15); color: var(--success); }
+    .platform-warn { background: rgba(245,158,11,0.12); color: var(--warning); }
+
+    .issues-list {
+      margin-top: 10px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+    .issues-list li { margin-left: 16px; margin-bottom: 3px; }
+
+    /* Actions bar */
+    .actions-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Status toast */
+    .toast {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: #1e293b;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-size: 0.875rem;
+      box-shadow: var(--shadow);
+      transform: translateY(120%);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 100;
+      max-width: 360px;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+    .toast.success { border-left: 4px solid var(--success); }
+    .toast.error { border-left: 4px solid var(--danger); }
+
+    /* Loading spinner */
+    .spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Footer note */
+    .footer-note {
+      grid-column: 1 / -1;
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 0.8rem;
+      margin-top: 8px;
+    }
+    .footer-note a { color: var(--accent); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="brand">
+      <div class="brand-icon">SF</div>
+      <div>
+        <h1>Titus SkillForge</h1>
+        <span>Universal SKILL.md Creator · Claude · Grok · ChatGPT · Gemini · Antigravity</span>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="btn btn-ghost btn-sm" onclick="SkillForgeApp.showGuide()">📖 Guide</button>
+      <button class="btn btn-secondary btn-sm" onclick="SkillForgeApp.clearAll()">Clear</button>
+    </div>
+  </header>
+
+  <main class="main">
+    <!-- LEFT: Input -->
+    <section class="card">
+      <div class="card-header">
+        <h2>📥 Source Input</h2>
+        <span id="fileUploadBadge"></span>
+      </div>
+      <div class="card-body">
+        <div class="upload-zone" id="uploadZone">
+          <p>Drop PDF, DOCX, PPTX, image, or text file here<br>
+          <strong>or click to browse</strong></p>
+          <input type="file" id="fileInput" hidden accept=".pdf,.docx,.doc,.pptx,.png,.jpg,.jpeg,.webp,.txt,.md,.json,.yaml,.yml,.py,.js,.ts,.html,.csv" />
+        </div>
+
+        <div class="templates" id="templateChips">
+          <!-- populated by JS -->
+        </div>
+
+        <div class="form-group">
+          <label for="rawTextInput">Raw text / SOP / prompt description</label>
+          <textarea id="rawTextInput" placeholder="Paste your procedure, documentation, SOP, or describe the skill you want to create..."></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="skillNameInput">Skill name (kebab-case)</label>
+            <input type="text" id="skillNameInput" placeholder="e.g. api-security-auditor" />
+          </div>
+          <div class="form-group">
+            <label for="categorySelect">Category</label>
+            <select id="categorySelect">
+              <option value="general">General</option>
+              <option value="security">Security</option>
+              <option value="development">Development</option>
+              <option value="devops">DevOps</option>
+              <option value="data">Data & Analytics</option>
+              <option value="research">Research</option>
+              <option value="writing">Writing</option>
+              <option value="productivity">Productivity</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="boundarySelect">Boundary level</label>
+            <select id="boundarySelect">
+              <option value="read-only">Read-only (safest)</option>
+              <option value="standard" selected>Standard</option>
+              <option value="high-consequence">High-consequence</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="descInput">Description (optional)</label>
+            <input type="text" id="descInput" placeholder="Short capability + trigger summary" />
+          </div>
+        </div>
+
+        <div class="actions-bar" style="border:none;padding-top:0;margin-top:4px;">
+          <button class="btn btn-primary" id="synthesizeBtn" onclick="SkillForgeApp.synthesizeSkill()">
+            ⚡ Synthesize SKILL.md
+          </button>
+          <button class="btn btn-secondary" onclick="SkillForgeApp.validateCurrent()">
+            🛡️ Validate
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT: Output -->
+    <section class="card">
+      <div class="card-header">
+        <h2>📄 Generated SKILL.md</h2>
+        <div style="display:flex;gap:6px;">
+          <button class="btn btn-ghost btn-sm" onclick="SkillForgeApp.copyToClipboard()">📋 Copy</button>
+          <button class="btn btn-ghost btn-sm" onclick="SkillForgeApp.downloadMd()">💾 .md</button>
+          <button class="btn btn-success btn-sm" onclick="SkillForgeApp.exportZip()">📦 ZIP</button>
+        </div>
+      </div>
+      <div class="card-body">
+        <textarea id="skillMarkdownOutput" readonly placeholder="Synthesized SKILL.md will appear here..."></textarea>
+
+        <div class="validation-panel" id="validationPanel">
+          <div style="display:flex;align-items:center;">
+            <div class="score-ring" id="scoreRing">—</div>
+            <div>
+              <div style="font-weight:600;" id="validStatus">Not validated</div>
+              <div class="platform-badges" id="platformBadges"></div>
+            </div>
+          </div>
+          <ul class="issues-list" id="issuesList"></ul>
+        </div>
+
+        <div class="actions-bar">
+          <button class="btn btn-secondary btn-sm" onclick="SkillForgeApp.installSkill('workspace')">📁 Install to Workspace</button>
+          <button class="btn btn-secondary btn-sm" onclick="SkillForgeApp.installSkill('claude')">🚀 Claude</button>
+          <button class="btn btn-secondary btn-sm" onclick="SkillForgeApp.installSkill('antigravity')">🚀 Antigravity / Gemini</button>
+        </div>
+      </div>
+    </section>
+
+    <p class="footer-note">
+      Output is a standards-compliant <code>SKILL.md</code> with YAML frontmatter + structured Markdown.
+      Compatible with Claude Code skills, xAI Grok skills, ChatGPT Custom GPTs, Gemini system instructions, and Antigravity.
+    </p>
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const API = '';  // same origin
+
+    const SkillForgeApp = {
+      templates: [],
+
+      async init() {
+        // Upload zone
+        const zone = document.getElementById('uploadZone');
+        const fileInput = document.getElementById('fileInput');
+        zone.addEventListener('click', () => fileInput.click());
+        zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
+        zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
+        zone.addEventListener('drop', e => {
+          e.preventDefault();
+          zone.classList.remove('dragover');
+          if (e.dataTransfer.files.length) this.handleFile(e.dataTransfer.files[0]);
+        });
+        fileInput.addEventListener('change', () => {
+          if (fileInput.files.length) this.handleFile(fileInput.files[0]);
+        });
+
+        // Load templates
+        try {
+          const res = await fetch(`${API}/api/templates`);
+          const data = await res.json();
+          this.templates = data.templates || [];
+          const chips = document.getElementById('templateChips');
+          this.templates.forEach(t => {
+            const chip = document.createElement('button');
+            chip.className = 'template-chip';
+            chip.textContent = t.name;
+            chip.title = t.sample_text.slice(0, 120) + '…';
+            chip.onclick = () => this.loadTemplate(t);
+            chips.appendChild(chip);
+          });
+        } catch (e) {
+          console.warn('Templates load failed', e);
+        }
+      },
+
+      loadTemplate(t) {
+        document.getElementById('rawTextInput').value = t.sample_text;
+        document.getElementById('skillNameInput').value = t.id;
+        document.getElementById('categorySelect').value = t.category || 'general';
+        document.getElementById('boundarySelect').value = t.boundary || 'standard';
+        this.toast(`Loaded template: ${t.name}`);
+      },
+
+      async handleFile(file) {
+        const badge = document.getElementById('fileUploadBadge');
+        badge.style.display = 'inline-block';
+        badge.textContent = `Uploading ${file.name}…`;
+
+        const form = new FormData();
+        form.append('file', file);
+
+        try {
+          const res = await fetch(`${API}/api/upload`, { method: 'POST', body: form });
+          if (!res.ok) throw new Error(await res.text());
+          const data = await res.json();
+          document.getElementById('rawTextInput').value = data.text || '';
+          if (!document.getElementById('skillNameInput').value) {
+            const stem = file.name.replace(/\.[^.]+$/, '').toLowerCase().replace(/[\s_]+/g, '-');
+            document.getElementById('skillNameInput').value = stem;
+          }
+          badge.textContent = `Loaded: ${file.name} (${data.format})`;
+          this.toast(`Extracted ${ (data.text||'').length } characters from ${file.name}`, 'success');
+        } catch (err) {
+          badge.textContent = 'Upload failed';
+          this.toast('Upload failed: ' + err.message, 'error');
+        }
+      },
+
+      async synthesizeSkill() {
+        const raw = document.getElementById('rawTextInput').value.trim();
+        if (!raw) {
+          this.toast('Please provide source text or upload a document.', 'error');
+          return;
+        }
+
+        const btn = document.getElementById('synthesizeBtn');
+        const orig = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner"></span> Synthesizing…';
+
+        const payload = {
+          raw_text: raw,
+          skill_name: document.getElementById('skillNameInput').value.trim() || null,
+          description: document.getElementById('descInput').value.trim() || null,
+          category: document.getElementById('categorySelect').value,
+          boundary_level: document.getElementById('boundarySelect').value,
+          author: 'Titus SkillForge Universal',
+          version: '1.0.0'
+        };
+
+        try {
+          const res = await fetch(`${API}/api/synthesize`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          if (!res.ok) {
+            const err = await res.json().catch(() => ({}));
+            throw new Error(err.detail || res.statusText);
+          }
+          const data = await res.json();
+          document.getElementById('skillMarkdownOutput').value = data.markdown || '';
+          if (data.name) document.getElementById('skillNameInput').value = data.name;
+          this.renderValidation(data.validation);
+          this.toast(`SKILL.md synthesized: ${data.name}`, 'success');
+        } catch (err) {
+          this.toast('Synthesis failed: ' + err.message, 'error');
+        } finally {
+          btn.disabled = false;
+          btn.innerHTML = orig;
+        }
+      },
+
+      async validateCurrent() {
+        const md = document.getElementById('skillMarkdownOutput').value;
+        if (!md.trim()) {
+          this.toast('Nothing to validate. Synthesize a skill first.', 'error');
+          return;
+        }
+        try {
+          const res = await fetch(`${API}/api/validate`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ markdown: md })
+          });
+          const data = await res.json();
+          this.renderValidation(data.validation);
+          this.toast(`Validation score: ${data.validation.score}/100`, data.validation.valid ? 'success' : 'error');
+        } catch (err) {
+          this.toast('Validation error: ' + err.message, 'error');
+        }
+      },
+
+      renderValidation(val) {
+        if (!val) return;
+        const panel = document.getElementById('validationPanel');
+        panel.classList.add('visible');
+
+        const ring = document.getElementById('scoreRing');
+        ring.textContent = val.score ?? '—';
+        ring.className = 'score-ring ' + (val.score >= 80 ? 'score-high' : val.score >= 50 ? 'score-mid' : 'score-low');
+
+        document.getElementById('validStatus').textContent =
+          val.valid ? '✓ Valid universal skill' : '⚠ Needs attention';
+
+        const badges = document.getElementById('platformBadges');
+        badges.innerHTML = '';
+        const compat = val.compatibility || val.platforms || {};
+        // Support both shapes from backend
+        const platforms = ['claude', 'grok', 'chatgpt', 'gemini', 'antigravity'];
+        platforms.forEach(p => {
+          let ok = false;
+          if (compat[p]) {
+            ok = typeof compat[p] === 'boolean' ? compat[p] : !!compat[p].compatible;
+          }
+          const el = document.createElement('span');
+          el.className = 'platform-badge ' + (ok ? 'platform-ok' : 'platform-warn');
+          el.textContent = (ok ? '✓ ' : '· ') + p;
+          badges.appendChild(el);
+        });
+
+        const list = document.getElementById('issuesList');
+        list.innerHTML = '';
+        (val.issues || []).forEach(i => {
+          const li = document.createElement('li');
+          li.style.color = 'var(--danger)';
+          li.textContent = i;
+          list.appendChild(li);
+        });
+        (val.warnings || []).forEach(w => {
+          const li = document.createElement('li');
+          li.style.color = 'var(--warning)';
+          li.textContent = w;
+          list.appendChild(li);
+        });
+      },
+
+      async copyToClipboard() {
+        const md = document.getElementById('skillMarkdownOutput').value;
+        if (!md) return this.toast('Nothing to copy', 'error');
+        try {
+          await navigator.clipboard.writeText(md);
+          this.toast('Copied to clipboard', 'success');
+        } catch {
+          // fallback
+          const ta = document.getElementById('skillMarkdownOutput');
+          ta.select();
+          document.execCommand('copy');
+          this.toast('Copied (fallback)', 'success');
+        }
+      },
+
+      downloadMd() {
+        const md = document.getElementById('skillMarkdownOutput').value;
+        if (!md) return this.toast('Nothing to download', 'error');
+        const name = (document.getElementById('skillNameInput').value || 'skill').replace(/[^a-z0-9-]/gi, '-') + '.md';
+        const blob = new Blob([md], { type: 'text/markdown' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = name;
+        a.click();
+        URL.revokeObjectURL(a.href);
+        this.toast('Download started', 'success');
+      },
+
+      async exportZip() {
+        const raw = document.getElementById('rawTextInput').value.trim();
+        if (!raw && !document.getElementById('skillMarkdownOutput').value) {
+          return this.toast('Synthesize or provide source first', 'error');
+        }
+        const payload = {
+          raw_text: raw || document.getElementById('skillMarkdownOutput').value,
+          skill_name: document.getElementById('skillNameInput').value.trim() || 'universal-skill',
+          description: document.getElementById('descInput').value.trim() || null,
+          category: document.getElementById('categorySelect').value,
+          boundary_level: document.getElementById('boundarySelect').value
+        };
+        try {
+          const res = await fetch(`${API}/api/export/zip`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          if (!res.ok) throw new Error('Export failed');
+          const blob = await res.blob();
+          const a = document.createElement('a');
+          a.href = URL.createObjectURL(blob);
+          a.download = (payload.skill_name || 'skill') + '-skill-package.zip';
+          a.click();
+          URL.revokeObjectURL(a.href);
+          this.toast('ZIP package downloaded', 'success');
+        } catch (err) {
+          this.toast('ZIP export failed: ' + err.message, 'error');
+        }
+      },
+
+      async installSkill(target) {
+        const md = document.getElementById('skillMarkdownOutput').value;
+        const name = document.getElementById('skillNameInput').value.trim() || 'custom-skill';
+        if (!md) return this.toast('Synthesize a skill first', 'error');
+
+        try {
+          const res = await fetch(`${API}/api/install`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ skill_name: name, markdown: md, target })
+          });
+          const data = await res.json();
+          if (data.success || data.installed_path || data.installed_paths) {
+            this.toast(`Installed to ${target}: ${data.installed_path || (data.installed_paths||[]).join(', ') || data.message || 'ok'}`, 'success');
+          } else {
+            this.toast(data.message || data.detail || 'Install completed with notes', 'success');
+          }
+        } catch (err) {
+          this.toast('Install failed (local paths only work on host machine): ' + err.message, 'error');
+        }
+      },
+
+      resetForm() {
+        document.getElementById('rawTextInput').value = '';
+        document.getElementById('skillNameInput').value = '';
+        document.getElementById('descInput').value = '';
+        document.getElementById('skillMarkdownOutput').value = '';
+        document.getElementById('fileUploadBadge').style.display = 'none';
+        document.getElementById('validationPanel').classList.remove('visible');
+        this.toast('Form reset');
+      },
+
+      clearAll() { this.resetForm(); },
+
+      showGuide() {
+        alert(
+`Universal SKILL.md Guide
+
+A valid skill file contains:
+
+1. YAML Frontmatter (between --- lines)
+   • name: kebab-case identifier
+   • description: capability + trigger criteria
+   • version, author, license, compatibility
+   • metadata (tags, platform-specific hints)
+
+2. Structured Markdown body
+   • Purpose & Capability Overview
+   • Activation & Trigger Criteria
+   • Execution Workflow (numbered steps)
+   • Operational Rules & Boundaries
+   • Input / Output Contracts
+   • Error Handling & Edge Cases
+   • Concrete Scenarios & Examples
+
+This format is directly usable by:
+• Claude Code / Claude Desktop skills
+• xAI Grok (.grok/skills)
+• ChatGPT Custom GPT instructions
+• Google Gemini system instructions
+• Antigravity (~/.gemini/config/skills)`
+        );
+      },
+
+      toast(msg, type = '') {
+        const el = document.getElementById('toast');
+        el.textContent = msg;
+        el.className = 'toast show ' + (type || '');
+        clearTimeout(this._toastTimer);
+        this._toastTimer = setTimeout(() => el.classList.remove('show'), 3200);
+      }
+    };
+
+    // Expose for desktop_app.py bridge
+    window.SkillForgeApp = SkillForgeApp;
+    document.addEventListener('DOMContentLoaded', () => SkillForgeApp.init());
+  </script>
+</body>
+</html>
