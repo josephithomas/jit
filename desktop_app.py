@@ -45,17 +45,22 @@ from validator import SkillValidator
 from installer import SkillInstaller
 
 
-def find_available_port(start_port: int = 8000, max_attempts: int = 20) -> int:
-    """Find an available port starting from start_port."""
-    for p in range(start_port, start_port + max_attempts):
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-            s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-            try:
-                s.bind(("127.0.0.1", p))
-                return p
-            except OSError:
-                continue
-    return start_port
+def free_port(port: int = 8000):
+    """Ensure standard port 8000 is freed from any stale processes."""
+    try:
+        import subprocess
+        res = subprocess.run("netstat -ano", shell=True, capture_output=True, text=True)
+        my_pid = os.getpid()
+        for line in res.stdout.splitlines():
+            if f":{port}" in line and "LISTENING" in line:
+                parts = line.strip().split()
+                if parts:
+                    pid = int(parts[-1])
+                    if pid != my_pid and pid > 4:
+                        subprocess.run(f"taskkill /F /PID {pid}", shell=True, capture_output=True)
+                        time.sleep(0.4)
+    except Exception as e:
+        log_debug(f"Warning freeing port {port}: {e}")
 
 
 def wait_for_server(host: str, port: int, timeout: float = 12.0) -> bool:
@@ -79,15 +84,18 @@ class ServerThread(threading.Thread):
         self.server = None
 
     def run(self):
-        config = uvicorn.Config(
-            app=fastapi_app,
-            host=self.host,
-            port=self.port,
-            log_level="warning",
-            access_log=False
-        )
-        self.server = uvicorn.Server(config)
-        self.server.run()
+        try:
+            config = uvicorn.Config(
+                app=fastapi_app,
+                host=self.host,
+                port=self.port,
+                log_level="warning",
+                access_log=False
+            )
+            self.server = uvicorn.Server(config)
+            self.server.run()
+        except Exception as e:
+            log_debug(f"Error in ServerThread: {e}\n{traceback.format_exc()}")
 
     def stop(self):
         if self.server:
@@ -608,20 +616,29 @@ def log_debug(msg: str):
 def main():
     log_debug("Starting Titus SkillForge Studio...")
     try:
-        # 1. Determine available port (default 8000)
-        port = find_available_port(8000)
-        log_debug(f"Selected port: {port}")
+        port = 8000
+        # 1. Clear any stale process on port 8000
+        free_port(port)
+        log_debug(f"Target port: {port}")
 
-        # 2. Start FastAPI server thread
-        server_thread = ServerThread("127.0.0.1", port)
+        # 2. Start FastAPI server thread bound to 0.0.0.0
+        server_thread = ServerThread("0.0.0.0", port)
         server_thread.start()
-        log_debug("Server thread started.")
+        log_debug("Server thread started on 0.0.0.0:8000.")
 
-        # 3. Wait until server responds to socket connections (max 12s)
+        # 3. Wait until server responds to socket connections
         server_ready = wait_for_server("127.0.0.1", port, timeout=12.0)
         log_debug(f"Server ready status: {server_ready}")
 
-        # 4. Initialize PyQt6 GUI
+        # 4. Open default web browser so user immediately has live access
+        if server_ready:
+            try:
+                webbrowser.open(f"http://127.0.0.1:{port}")
+                log_debug("Opened browser to http://127.0.0.1:8000")
+            except Exception as be:
+                log_debug(f"Browser launch note: {be}")
+
+        # 5. Initialize PyQt6 GUI
         app = QApplication(sys.argv)
         app.setApplicationName("Titus SkillForge Studio")
         app.setOrganizationName("Titus Universal")
@@ -630,7 +647,7 @@ def main():
         window.show()
         window.raise_()
         window.activateWindow()
-        log_debug("Window shown, entering exec()...")
+        log_debug("Native window displayed, entering event loop...")
 
         # Run application event loop
         exit_code = app.exec()
