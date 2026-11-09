@@ -37,6 +37,7 @@ Caveat emptor (Grok is responsible)
 - **Shubhamsaboo/awesome-llm-apps** — Curated list of LLM applications and agent patterns.
 - **paperclipai/paperclip** — Open-source app for managing agents at work.
 - **alibaba/open-code-review** — Battle-tested hybrid code-review tooling and pipelines.
+- **ashishpatel26/500-AI-Agents-Projects** — Curated collection of 500+ AI agent projects and use cases across industries (healthcare, finance, education, retail, etc.) with working implementations (LangGraph, CrewAI, LangChain, AutoGen, etc.). Site: https://ashishpatel26.github.io/500-AI-Agents-Projects/
 
 ## Coding Agent Infrastructure
 
@@ -69,4 +70,4 @@ Caveat emptor (Grok is responsible)
 - All skills installed for day-to-day use must also be reflected under `skills/` in this repo so they survive account switches.
 - Prefer converting / adapting external skills into Grok-compatible `SKILL.md` format when installing.
 - Always act according to the guiding principles listed above.
-- Last updated: 2026-11-08
+- Last updated: 2026-11-09
