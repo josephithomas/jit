@@ -37,7 +37,7 @@ Caveat emptor (Grok is responsible)
 - **Shubhamsaboo/awesome-llm-apps** — Curated list of LLM applications and agent patterns.
 - **paperclipai/paperclip** — Open-source app for managing agents at work.
 - **alibaba/open-code-review** — Battle-tested hybrid code-review tooling and pipelines.
-- **ashishpatel26/500-AI-Agents-Projects** — Curated collection of 500+ AI agent projects and use cases across industries (healthcare, finance, education, retail, etc.) with working implementations (LangGraph, CrewAI, LangChain, AutoGen, etc.). Site: https://ashishpatel26.github.io/500-AI-Agents-Projects/
+- **ashishpatel26/500-AI-Agents-Projects** — Curated collection of 500+ AI agent projects and use cases across industries with working implementations (LangGraph, CrewAI, LangChain, AutoGen, etc.). Local catalog of the 21 runnable agents is at `agents/` in this repo. Site: https://ashishpatel26.github.io/500-AI-Agents-Projects/
 
 ## Coding Agent Infrastructure
 
