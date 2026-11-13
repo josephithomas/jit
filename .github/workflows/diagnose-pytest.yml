@@ -2,9 +2,6 @@ name: Diagnose pytest
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - '.github/workflows/diagnose-pytest.yml'
 
 permissions:
   contents: read
@@ -17,27 +14,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.10'
-      - name: Install and run pytest with full output
+      - name: Install and run pytest
         run: |
-          set -x
-          python -m pip install --upgrade pip
-          pip install flake8 pytest
-          python -V
-          which pytest
-          pytest --version
-          echo "=== collect-only ==="
-          pytest --collect-only -q 2>&1 || true
-          echo "=== pytest -vv --tb=long ==="
-          pytest -vv --tb=long 2>&1 | tee pytest-out.txt
-          echo "pytest_exit=${PIPESTATUS[0]}" | tee -a pytest-out.txt
-          echo "=== tree tests ==="
-          find tests -type f 2>&1 || true
-          echo "=== ls root py ==="
-          ls -la *.py 2>&1 | head -30
-        continue-on-error: true
-      - name: Upload log
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: pytest-out
-          path: pytest-out.txt
+          pip install pytest
+          pytest -vv --tb=short
