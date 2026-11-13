@@ -5,7 +5,7 @@ import base64
 import ctypes
 from typing import Optional
 from PyQt6.QtGui import QIcon, QPixmap
-from PyQt6.QtCore import QByteArray
+from PyQt6.QtCore import QByteArray, Qt
 
 
 def set_windows_app_id(app_id: str = "titus.omnisort.pro.2.0"):
@@ -68,4 +68,3 @@ def get_app_pixmap(size: int = 36) -> QPixmap:
     pix = QPixmap(size, size)
     pix.fill(Qt.GlobalColor.transparent)
     return pix
-

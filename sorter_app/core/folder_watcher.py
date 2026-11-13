@@ -2,7 +2,7 @@
 import os
 import time
 import threading
-from typing import List, Dict, Callable, Optional, Set
+from typing import List, Dict, Callable, Optional, Set, Tuple
 
 from .organizer_engine import OrganizerEngine
 
@@ -32,96 +32,85 @@ class FolderWatcher:
         if abs_p in self.watched_paths:
             self.watched_paths.remove(abs_p)
 
+    def add_event_callback(self, cb: Callable[[str, str], None]):
+        self.event_callbacks.append(cb)
+
     def start(self):
         if self.active:
             return
         self.active = True
         self._stop_event.clear()
-        # Seed known files so existing files aren't immediately processed unless desired
-        self._known_files.clear()
-        for folder in self.watched_paths:
-            if os.path.exists(folder):
-                for f in os.listdir(folder):
-                    fp = os.path.join(folder, f)
-                    if os.path.isfile(fp):
-                        self._known_files.add(fp)
-
         self._thread = threading.Thread(target=self._watch_loop, daemon=True)
         self._thread.start()
 
     def stop(self):
-        if not self.active:
-            return
         self.active = False
         self._stop_event.set()
         if self._thread and self._thread.is_alive():
             self._thread.join(timeout=2.0)
 
+    def _scan_once(self):
+        now = time.time()
+        current_files: Set[str] = set()
+
+        for watch_path in list(self.watched_paths):
+            if not os.path.isdir(watch_path):
+                continue
+            try:
+                for name in os.listdir(watch_path):
+                    full = os.path.join(watch_path, name)
+                    if not os.path.isfile(full):
+                        continue
+                    current_files.add(full)
+                    try:
+                        size = os.path.getsize(full)
+                    except OSError:
+                        continue
+
+                    if full not in self._known_files:
+                        # New file appeared
+                        self._pending_files[full] = (now, size)
+                    elif full in self._pending_files:
+                        last_time, last_size = self._pending_files[full]
+                        if size != last_size:
+                            # Still growing
+                            self._pending_files[full] = (now, size)
+            except OSError:
+                continue
+
+        # Promote settled files
+        ready = []
+        for path, (seen_at, size) in list(self._pending_files.items()):
+            if path not in current_files:
+                self._pending_files.pop(path, None)
+                continue
+            if now - seen_at >= self.settle_seconds:
+                ready.append(path)
+
+        for path in ready:
+            self._pending_files.pop(path, None)
+            self._known_files.add(path)
+            try:
+                self.engine.organize_file(path)
+                for cb in self.event_callbacks:
+                    try:
+                        cb("organized", path)
+                    except Exception:
+                        pass
+            except Exception as e:
+                for cb in self.event_callbacks:
+                    try:
+                        cb("error", f"{path}: {e}")
+                    except Exception:
+                        pass
+
+        # Drop known files that disappeared
+        self._known_files &= current_files
+
     def _watch_loop(self):
         while not self._stop_event.is_set():
-            now = time.time()
-            # 1. Scan watched folders for new files
-            for folder in self.watched_paths:
-                if not os.path.exists(folder):
-                    continue
-                try:
-                    entries = os.listdir(folder)
-                except OSError:
-                    continue
-
-                for entry in entries:
-                    file_path = os.path.join(folder, entry)
-                    if not os.path.isfile(file_path):
-                        continue
-
-                    # Ignore partial download files
-                    lower_name = entry.lower()
-                    if lower_name.endswith(('.crdownload', '.part', '.tmp', '.download')):
-                        continue
-
-                    if file_path not in self._known_files and file_path not in self._pending_files:
-                        try:
-                            sz = os.path.getsize(file_path)
-                            self._pending_files[file_path] = (now, sz)
-                        except OSError:
-                            pass
-
-            # 2. Check pending files for stabilization (settling time)
-            ready_to_sort: List[str] = []
-            for fp, (first_seen, last_sz) in list(self._pending_files.items()):
-                if not os.path.exists(fp):
-                    del self._pending_files[fp]
-                    continue
-
-                try:
-                    current_sz = os.path.getsize(fp)
-                except OSError:
-                    continue
-
-                # If size changed, reset timer
-                if current_sz != last_sz:
-                    self._pending_files[fp] = (now, current_sz)
-                elif (now - first_seen) >= self.settle_seconds:
-                    ready_to_sort.append(fp)
-                    del self._pending_files[fp]
-                    self._known_files.add(fp)
-
-            # 3. Process stabilized files
-            if ready_to_sort:
-                ops = self.engine.generate_preview(
-                    file_paths=ready_to_sort,
-                    preset_mode='rules'
-                )
-                if ops:
-                    res = self.engine.execute_operations(
-                        operations=ops,
-                        batch_description="Auto-Watcher Live Sort",
-                        source_root="Watched Folders"
-                    )
-                    for op in ops:
-                        if op.status == "Done":
-                            for cb in self.event_callbacks:
-                                cb(op.source_path, op.target_path)
-
-            time.sleep(1.0)
-
+            try:
+                self._scan_once()
+            except Exception:
+                pass
+            self._stop_event.wait(1.0)

@@ -2,7 +2,7 @@
 import os
 import hashlib
 from dataclasses import dataclass
-from typing import List, Dict, Callable, Optional, Set
+from typing import List, Dict, Callable, Optional, Set, Tuple
 
 from .recycle_bin import send_to_recycle_bin
 
@@ -84,108 +84,61 @@ class DuplicateFinder:
                 except OSError:
                     continue
 
-        # Keep only sizes with 2+ files
-        potential_candidates: List[str] = []
-        for sz, files in size_map.items():
-            if len(files) > 1:
-                potential_candidates.extend(files)
-
-        if not potential_candidates:
-            return []
-
-        # Phase 2: Quick partial hash comparison
-        quick_hash_map: Dict[Tuple[int, str], List[str]] = {}
+        # Phase 2: Quick-hash candidates of same size
+        candidates: Dict[str, List[str]] = {}
         processed = 0
-        total_candidates = len(potential_candidates)
-
-        for p in potential_candidates:
-            if self._cancel_requested:
-                return []
-            processed += 1
-            if progress_cb and processed % 20 == 0:
-                progress_cb(processed, total_candidates, f"Quick checking {os.path.basename(p)}")
-
-            try:
-                sz = os.path.getsize(p)
-                qhash = self._get_quick_hash(p)
-                if qhash:
-                    quick_hash_map.setdefault((sz, qhash), []).append(p)
-            except OSError:
+        for size, paths in size_map.items():
+            if len(paths) < 2:
                 continue
+            for path in paths:
+                if self._cancel_requested:
+                    return []
+                processed += 1
+                if progress_cb and processed % 50 == 0:
+                    progress_cb(processed, total_files, path)
+                qh = self._get_quick_hash(path)
+                if qh:
+                    key = f"{size}:{qh}"
+                    candidates.setdefault(key, []).append(path)
 
-        # Phase 3: Full SHA-256 for exact matches
-        final_groups: List[DuplicateGroup] = []
-        full_hash_candidates: List[str] = []
+        # Phase 3: Full hash confirmation
+        groups: List[DuplicateGroup] = []
+        for key, paths in candidates.items():
+            if len(paths) < 2:
+                continue
+            hash_map: Dict[str, List[str]] = {}
+            for path in paths:
+                if self._cancel_requested:
+                    return []
+                fh = self._get_full_hash(path)
+                if fh:
+                    hash_map.setdefault(fh, []).append(path)
 
-        for (sz, _), files in quick_hash_map.items():
-            if len(files) > 1:
-                full_hash_candidates.extend(files)
-
-        full_hash_map: Dict[str, List[str]] = {}
-        processed = 0
-        total_full = len(full_hash_candidates)
-
-        for p in full_hash_candidates:
-            if self._cancel_requested:
-                return []
-            processed += 1
-            if progress_cb:
-                progress_cb(processed, total_full, f"Computing SHA-256 for {os.path.basename(p)}")
-
-            fhash = self._get_full_hash(p)
-            if fhash:
-                full_hash_map.setdefault(fhash, []).append(p)
-
-        for fhash, files in full_hash_map.items():
-            if len(files) > 1:
-                try:
-                    file_size = os.path.getsize(files[0])
-                except OSError:
-                    file_size = 0
-
+            for file_hash, same_files in hash_map.items():
+                if len(same_files) < 2:
+                    continue
                 items = []
-                # Sort by modification time ascending so oldest is first
-                files_with_mtime = []
-                for f in files:
+                for i, p in enumerate(same_files):
                     try:
-                        mtime = os.path.getmtime(f)
+                        st = os.stat(p)
+                        items.append(DuplicateItem(
+                            path=p,
+                            size=st.st_size,
+                            modified_time=st.st_mtime,
+                            is_original=(i == 0)
+                        ))
                     except OSError:
-                        mtime = 0
-                    files_with_mtime.append((f, mtime))
-                
-                files_with_mtime.sort(key=lambda x: x[1])
-
-                for idx, (f_path, mtime) in enumerate(files_with_mtime):
-                    items.append(DuplicateItem(
-                        path=f_path,
-                        size=file_size,
-                        modified_time=mtime,
-                        is_original=(idx == 0) # Default: oldest is original
+                        continue
+                if len(items) >= 2:
+                    # Mark oldest as original
+                    items.sort(key=lambda x: x.modified_time)
+                    for it in items:
+                        it.is_original = False
+                    items[0].is_original = True
+                    groups.append(DuplicateGroup(
+                        file_hash=file_hash,
+                        size=items[0].size,
+                        items=items
                     ))
 
-                final_groups.append(DuplicateGroup(
-                    file_hash=fhash,
-                    size=file_size,
-                    items=items
-                ))
-
-        return final_groups
-
-    @staticmethod
-    def resolve_duplicates(paths_to_remove: List[str], use_recycle_bin: bool = True) -> int:
-        """Removes duplicate files safely."""
-        if not paths_to_remove:
-            return 0
-        if use_recycle_bin:
-            send_to_recycle_bin(paths_to_remove)
-            return len(paths_to_remove)
-        else:
-            removed = 0
-            for p in paths_to_remove:
-                try:
-                    os.remove(p)
-                    removed += 1
-                except OSError:
-                    pass
-            return removed
-
+        return groups
