@@ -590,6 +590,7 @@ class StudioFramesMixin:
                 txt_content.delete("1.0", "end")
                 txt_content.insert("1.0", self.space_dashboard_data["executive_synthesis"])
             elif getattr(self, "active_pdf_path", None):
+                from App import PDFChatEngine  # late import avoids circular import with App
                 pages = PDFChatEngine.extract_document_pages(self.active_pdf_path)
                 s, _ = PDFChatEngine.query_local_bm25(pages, "executive summary and key objectives")
                 txt_content.delete("1.0", "end")
