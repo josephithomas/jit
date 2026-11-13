@@ -1,0 +1,2 @@
+CI trigger after restore of studio_frames.py / studio_engines.py and flake8 F821 fixes.
+Timestamp: 2026-11-13
