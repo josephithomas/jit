@@ -1,0 +1,77 @@
+name: Fix late import
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/fix-late-import.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Apply late import via regex
+        run: |
+          set -euxo pipefail
+          python3 << 'PY'
+          from pathlib import Path
+          import re
+          p = Path('studio_frames.py')
+          t = p.read_text(encoding='utf-8')
+          if 'from App import PDFChatEngine' in t:
+              print('already fixed')
+          else:
+              # Insert late import immediately before first PDFChatEngine use in that elif branch
+              pat = re.compile(
+                  r'(elif getattr\(self, "active_pdf_path", None\):\n)([ \t]+)(pages = PDFChatEngine\.extract_document_pages)',
+                  re.M,
+              )
+              m = pat.search(t)
+              if not m:
+                  raise SystemExit('pattern not found')
+              indent = m.group(2)
+              repl = m.group(1) + indent + 'from App import PDFChatEngine  # late import avoids circular import with App\n' + indent + m.group(3)
+              t2, n = pat.subn(repl, t, count=1)
+              if n != 1:
+                  raise SystemExit(f'unexpected replacements: {n}')
+              p.write_text(t2, encoding='utf-8')
+              print('fixed ok, new size', len(t2))
+              assert 'from App import PDFChatEngine' in t2
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add studio_frames.py
+          git status
+          if git diff --cached --quiet; then
+            echo no change
+          else
+            git commit -m "fix: late-import PDFChatEngine in studio_frames.py for flake8 F821"
+            git push origin HEAD:main
+          fi
+
+      - name: Cleanup one-shot workflows
+        if: always()
+        run: |
+          set -euxo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin main
+          git checkout main
+          git pull origin main || true
+          for f in .github/workflows/fix-late-import.yml .github/workflows/restore-studio.yml; do
+            if [ -f "$f" ]; then
+              git rm -f "$f" || rm -f "$f"
+            fi
+          done
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m "ci: remove one-shot restore/fix workflows" || true
+            git push origin HEAD:main || true
+          fi
