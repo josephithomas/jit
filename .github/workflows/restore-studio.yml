@@ -1,0 +1,78 @@
+name: Restore studio files
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/restore-studio.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Restore full sources from 9163a2d and apply flake8 fix
+        run: |
+          set -euo pipefail
+          git checkout 9163a2d -- studio_frames.py studio_engines.py
+
+          python3 << 'PY'
+          from pathlib import Path
+
+          # Strip BOM on both
+          for name in ('studio_frames.py', 'studio_engines.py'):
+              p = Path(name)
+              text = p.read_text(encoding='utf-8-sig')
+              p.write_text(text, encoding='utf-8')
+              print(f'stripped BOM: {name} ({len(text)} chars)')
+
+          # Late-import PDFChatEngine to fix F821 without circular import
+          p = Path('studio_frames.py')
+          t = p.read_text(encoding='utf-8')
+          old = '''            elif getattr(self, "active_pdf_path", None):
+                pages = PDFChatEngine.extract_document_pages(self.active_pdf_path)
+                s, _ = PDFChatEngine.query_local_bm25(pages, "executive summary and key objectives")
+                txt_content.delete("1.0", "end")
+                txt_content.insert("1.0", s)'''
+          new = '''            elif getattr(self, "active_pdf_path", None):
+                from App import PDFChatEngine  # late import avoids circular import with App
+                pages = PDFChatEngine.extract_document_pages(self.active_pdf_path)
+                s, _ = PDFChatEngine.query_local_bm25(pages, "executive summary and key objectives")
+                txt_content.delete("1.0", "end")
+                txt_content.insert("1.0", s)'''
+          if old not in t:
+              if 'from App import PDFChatEngine' in t:
+                  print('late import already present')
+              else:
+                  raise SystemExit('expected PDFChatEngine block not found')
+          else:
+              p.write_text(t.replace(old, new), encoding='utf-8')
+              print('applied PDFChatEngine late import')
+          PY
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add studio_frames.py studio_engines.py
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "fix: restore full studio_frames.py and studio_engines.py (BOM strip + PDFChatEngine late-import for flake8)"
+            git push
+          fi
+
+      - name: Remove this one-shot workflow
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ -f .github/workflows/restore-studio.yml ]; then
+            git rm .github/workflows/restore-studio.yml
+            git commit -m "ci: remove one-shot restore-studio workflow"
+            git push
+          fi
