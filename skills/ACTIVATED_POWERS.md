@@ -37,6 +37,7 @@ All resources below are treated as active standing capabilities for this workspa
 
 ## Coding Agent Infrastructure (Active)
 - **Alishahryar1/free-claude-code** — Local multi-provider proxy for Claude Code, Codex, Aider, Cline, Antigravity CLI, Grok Build and 8 other harnesses. Routes to 61 providers (large free tiers + paid + local). Automatic fallback, multi-key rotation, token optimization, Admin UI. Installed skill: `skills/free-claude-code/`.
+- **jiweiyeah/Skills-Manager** — Desktop app + CLI to manage and symlink-sync skills across ~32 AI coding tools. Installed entry: `skills/skills-manager/`.
 
 ## Ecosystem & Catalog Integrations
 - **ComposioHQ/awesome-claude-skills** & **hesreallyhim/awesome-claude-code**
