@@ -1,7 +1,7 @@
 # Activated Powers — Full List
 
 **Status: ALL LISTED RESOURCES ACTIVE**  
-Date: 2026-11-08
+Date: 2026-11-14
 
 All resources below are treated as active standing capabilities for this workspace and repository. Core methodologies are internalized; all installed skills are packaged under `skills/` for cross-machine reproducibility.
 
