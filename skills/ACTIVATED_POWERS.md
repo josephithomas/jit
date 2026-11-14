@@ -33,6 +33,7 @@ All resources below are treated as active standing capabilities for this workspa
 - **agentskills/agentskills** — Universal open specification for agent skills
 - **NISTALTALSON/essential-claude-skills** — Curated TDD, Playwright, Git guardrails, clean architecture & vibe-coding skills. Installed: `skills/essential-claude-skills/`.
 - **Leonxlnx/taste-skill** — Design taste & anti-slop for professional websites (art direction, real references, browser checks). Installed: `skills/taste-skill/`.
+- **ciembor/agent-rules-books** — Book-derived AGENTS.md rules/skills (Clean Code, Refactoring, DDD, Pragmatic Programmer, Legacy Code, etc.). mini/nano/full. Installed: `skills/agent-rules-books/`.
 
 ## Coding Agent Infrastructure (Active)
 - **Alishahryar1/free-claude-code** — Local multi-provider proxy for Claude Code, Codex, Aider, Cline, Antigravity CLI, Grok Build and 8 other harnesses. Routes to 61 providers (large free tiers + paid + local). Automatic fallback, multi-key rotation, token optimization, Admin UI. Installed skill: `skills/free-claude-code/`.
