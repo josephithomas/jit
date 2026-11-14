@@ -39,6 +39,9 @@ All resources below are treated as active standing capabilities for this workspa
 - **Alishahryar1/free-claude-code** — Local multi-provider proxy for Claude Code, Codex, Aider, Cline, Antigravity CLI, Grok Build and 8 other harnesses. Routes to 61 providers (large free tiers + paid + local). Automatic fallback, multi-key rotation, token optimization, Admin UI. Installed skill: `skills/free-claude-code/`.
 - **jiweiyeah/Skills-Manager** — Desktop app + CLI to manage and symlink-sync skills across ~32 AI coding tools. Installed entry: `skills/skills-manager/`.
 
+## Security (Standing for Vibe Coding)
+- **raroque/vibe-security-skill** — Audit vibe-coded (and any) apps for AI-introduced vulns: secrets, RLS, auth, payments, rate limits, mobile, LLM, deployment, data access. **Standing: use while vibe coding.** Installed: `skills/vibe-security-skill/`.
+
 ## Ecosystem & Catalog Integrations
 - **ComposioHQ/awesome-claude-skills** & **hesreallyhim/awesome-claude-code**
 - **VoltAgent/awesome-openclaw-skills** & **VoltAgent/awesome-agent-skills** (1,497+ curated official + community skills). Installed entry: `skills/awesome-agent-skills/`.
