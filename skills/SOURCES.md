@@ -41,6 +41,7 @@ Caveat emptor (Grok is responsible)
 - **NISTALTALSON/essential-claude-skills** — Curated battle-tested skills focused on TDD, Playwright, Git guardrails, clean architecture, vibe coding, security, and agent engineering. Installed at `skills/essential-claude-skills/`.
 - **Leonxlnx/taste-skill** — Design-taste skill for coding agents: art direction, real references, browser verification, and anti-generic landing-page rules. Installed at `skills/taste-skill/`.
 - **ciembor/agent-rules-books** — AGENTS.md rules/skills distilled from classic software engineering books (Clean Code, Refactoring, DDD, Pragmatic Programmer, Legacy Code, Release It!, etc.). mini/nano/full variants. Installed at `skills/agent-rules-books/`.
+- **acvnace/awesome-vibe-coding-resources** — Curated list of vibe coding tools, resources, and news (browser builders, IDEs, CLIs, mobile, security). Installed at `skills/awesome-vibe-coding-resources/`.
 
 ## Coding Agent Infrastructure
 
