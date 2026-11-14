@@ -39,7 +39,7 @@ All resources below are treated as active standing capabilities for this workspa
 
 ## Ecosystem & Catalog Integrations
 - **ComposioHQ/awesome-claude-skills** & **hesreallyhim/awesome-claude-code**
-- **VoltAgent/awesome-openclaw-skills** & **VoltAgent/awesome-agent-skills**
+- **VoltAgent/awesome-openclaw-skills** & **VoltAgent/awesome-agent-skills** (1,497+ curated official + community skills). Installed entry: `skills/awesome-agent-skills/`.
 - **wshobson/agents** & **github/awesome-copilot**
 - **alirezarezvani/claude-skills** & **Shubhamsaboo/awesome-llm-apps**
 - **aitmpl.com** — Agent template registry & blueprints
