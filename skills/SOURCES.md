@@ -42,6 +42,7 @@ Caveat emptor (Grok is responsible)
 - **Leonxlnx/taste-skill** — Design-taste skill for coding agents: art direction, real references, browser verification, and anti-generic landing-page rules. Installed at `skills/taste-skill/`.
 - **ciembor/agent-rules-books** — AGENTS.md rules/skills distilled from classic software engineering books (Clean Code, Refactoring, DDD, Pragmatic Programmer, Legacy Code, Release It!, etc.). mini/nano/full variants. Installed at `skills/agent-rules-books/`.
 - **acvnace/awesome-vibe-coding-resources** — Curated list of vibe coding tools, resources, and news (browser builders, IDEs, CLIs, mobile, security). Installed at `skills/awesome-vibe-coding-resources/`.
+- **raroque/vibe-security-skill** — Security audit skill for vibe-coded apps (secrets, RLS, auth, payments, rate limits, mobile, LLM, deployment). Standing: use while vibe coding. Installed at `skills/vibe-security-skill/`.
 
 ## Coding Agent Infrastructure
 
