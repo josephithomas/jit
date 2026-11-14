@@ -46,6 +46,7 @@ Caveat emptor (Grok is responsible)
 ## Coding Agent Infrastructure
 
 - **Alishahryar1/free-claude-code** — Free Claude Code (FCC): local multi-provider proxy that routes Claude Code, Codex, Pi, OpenCode, Cline, Hermes, DeepSeek Harness, Grok Build, Muse Code, Aider, Antigravity CLI, and VS Code Chat to 61 providers (large free tiers + paid + local). Automatic fallback, multi-key rotation, Admin UI, token optimization. Skill installed at `skills/free-claude-code/`.
+- **jiweiyeah/Skills-Manager** — Free open-source desktop manager (Tauri) + CLI to write a skill once and symlink-sync it to ~32 AI coding tools. Installed at `skills/skills-manager/`.
 
 ## Registries & Platforms
 
