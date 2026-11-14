@@ -45,6 +45,7 @@ All resources below are treated as active standing capabilities for this workspa
 - **alirezarezvani/claude-skills** & **Shubhamsaboo/awesome-llm-apps**
 - **aitmpl.com** — Agent template registry & blueprints
 - **Anil-matcha** — Generative AI apps & automated media pipelines
+- **acvnace/awesome-vibe-coding-resources** — Curated vibe-coding tools, resources & news (browser builders, IDEs, CLIs, mobile, security). Installed: `skills/awesome-vibe-coding-resources/`.
 
 ## Full-Stack & Python Framework Skills
 - **FastAPI** (`fastapi/fastapi`) — Modern async APIs & Pydantic v2 contracts
