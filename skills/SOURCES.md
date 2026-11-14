@@ -38,6 +38,8 @@ Caveat emptor (Grok is responsible)
 - **paperclipai/paperclip** — Open-source app for managing agents at work.
 - **alibaba/open-code-review** — Battle-tested hybrid code-review tooling and pipelines.
 - **ashishpatel26/500-AI-Agents-Projects** — Curated collection of 500+ AI agent projects and use cases across industries with working implementations (LangGraph, CrewAI, LangChain, AutoGen, etc.). Local catalog of the 21 runnable agents is at `agents/` in this repo. Site: https://ashishpatel26.github.io/500-AI-Agents-Projects/
+- **NISTALTALSON/essential-claude-skills** — Curated battle-tested skills focused on TDD, Playwright, Git guardrails, clean architecture, vibe coding, security, and agent engineering. Installed at `skills/essential-claude-skills/`.
+- **Leonxlnx/taste-skill** — Design-taste skill for coding agents: art direction, real references, browser verification, and anti-generic landing-page rules. Installed at `skills/taste-skill/`.
 
 ## Coding Agent Infrastructure
 
@@ -70,4 +72,4 @@ Caveat emptor (Grok is responsible)
 - All skills installed for day-to-day use must also be reflected under `skills/` in this repo so they survive account switches.
 - Prefer converting / adapting external skills into Grok-compatible `SKILL.md` format when installing.
 - Always act according to the guiding principles listed above.
-- Last updated: 2026-11-09
+- Last updated: 2026-11-14
