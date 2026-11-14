@@ -17,7 +17,7 @@ All resources below are treated as active standing capabilities for this workspa
 - **mattpocock/skills** — Practical pair-programming: grill-me, domain-modeling, to-spec, TDD
 - **shanraisshan/claude-code-best-practice** — Terminal-first agent engineering workflows & orchestration
 - **affaan-m/ECC** — 314+ skills, 71 agents, hooks, memory, AgentShield
-- **sickn33/agentic-awesome-skills** — 2,700+ catalog playbooks
+- **sickn33/agentic-awesome-skills** — 2,957+ catalog playbooks (v20.8.0) + AAS Core. Installed entry: `skills/agentic-awesome-skills/`.
 - **ruvnet/ruflo** — Multi-agent swarms, 60+ agent types, 314 MCP tools, self-learning
 - **nyldn/claude-octopus** — Multi-AI orchestration, personas, workflows
 - **github/spec-kit** — Spec-driven development & lifecycle governance
