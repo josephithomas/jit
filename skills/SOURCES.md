@@ -43,6 +43,7 @@ Caveat emptor (Grok is responsible)
 - **ciembor/agent-rules-books** — AGENTS.md rules/skills distilled from classic software engineering books (Clean Code, Refactoring, DDD, Pragmatic Programmer, Legacy Code, Release It!, etc.). mini/nano/full variants. Installed at `skills/agent-rules-books/`.
 - **acvnace/awesome-vibe-coding-resources** — Curated list of vibe coding tools, resources, and news (browser builders, IDEs, CLIs, mobile, security). Installed at `skills/awesome-vibe-coding-resources/`.
 - **raroque/vibe-security-skill** — Security audit skill for vibe-coded apps (secrets, RLS, auth, payments, rate limits, mobile, LLM, deployment). Standing: use while vibe coding. Installed at `skills/vibe-security-skill/`.
+- **codecrafters-io/build-your-own-x** — Master programming by recreating favorite technologies from scratch. Huge curated list of high-quality step-by-step guides (databases, shells, Git, Redis, Docker, OS, neural nets, web servers, 3D renderers, blockchains, etc.). Installed at `skills/build-your-own-x/`.
 
 ## Coding Agent Infrastructure
 
@@ -76,4 +77,4 @@ Caveat emptor (Grok is responsible)
 - All skills installed for day-to-day use must also be reflected under `skills/` in this repo so they survive account switches.
 - Prefer converting / adapting external skills into Grok-compatible `SKILL.md` format when installing.
 - Always act according to the guiding principles listed above.
-- Last updated: 2026-11-14
+- Last updated: 2026-11-15

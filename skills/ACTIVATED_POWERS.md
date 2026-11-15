@@ -1,7 +1,7 @@
 # Activated Powers — Full List
 
 **Status: ALL LISTED RESOURCES ACTIVE**  
-Date: 2026-11-14
+Date: 2026-11-15
 
 All resources below are treated as active standing capabilities for this workspace and repository. Core methodologies are internalized; all installed skills are packaged under `skills/` for cross-machine reproducibility.
 
@@ -50,6 +50,7 @@ All resources below are treated as active standing capabilities for this workspa
 - **aitmpl.com** — Agent template registry & blueprints
 - **Anil-matcha** — Generative AI apps & automated media pipelines
 - **acvnace/awesome-vibe-coding-resources** — Curated vibe-coding tools, resources & news (browser builders, IDEs, CLIs, mobile, security). Installed: `skills/awesome-vibe-coding-resources/`.
+- **codecrafters-io/build-your-own-x** — Master programming by recreating technologies from scratch. Massive curated list of step-by-step guides (Redis, Git, Docker, OS, neural nets, databases, shells, web servers, 3D, blockchain, etc.). Installed: `skills/build-your-own-x/`.
 
 ## Full-Stack & Python Framework Skills
 - **FastAPI** (`fastapi/fastapi`) — Modern async APIs & Pydantic v2 contracts
