@@ -56,7 +56,7 @@ A massive, high-signal curated list of well-written, step-by-step guides for re-
 Browse the live curated list:
 
 ```bash
-# View or clone the catalog
+# View or clone the catalog (shallow clone preferred for token economy)
 git clone --depth 1 https://github.com/codecrafters-io/build-your-own-x.git
 ```
 
@@ -64,13 +64,19 @@ Or open directly: https://github.com/codecrafters-io/build-your-own-x
 
 When a specific technology is requested (e.g. "build your own Redis" or "Git from scratch"), surface the matching high-quality tutorials from the list and prefer the most complete / recently maintained ones.
 
-## Operating Rules for This Workspace
+## Operating Rules (Must Abide by Standing Instructions)
 
-1. Treat as a **reference catalog + learning resource**, not a bulk-install skill pack.
-2. Do **not** copy the full README or tutorial list into jit — keep this thin entry only.
-3. Prefer primary upstream tutorial links; verify they are still live and high quality before recommending.
-4. When implementing, follow Karpathy-style simplicity, surgical changes, and the standing rules in `RULES.md`.
-5. Excellent companion to reverse-engineering / vibe-coding sessions and to the free-claude-code harnesses.
+This skill is governed by the permanent standing instructions in `RULES.md`. In particular:
+
+1. **Results & Objectives Above All** — Deliver the needed understanding or working reconstruction. Prefer the shortest path to a correct, functional outcome.
+2. **GitHub Space Anchor** — All work, clones, branches, and derived code live under or are referenced from `https://github.com/josephithomas/jit`. Never create parallel skill trees or massive copies outside `skills/`.
+3. **Thin Entry Only** — Treat this as a reference catalog. Do **not** copy the full README, tutorial list, or any large upstream content into jit. Keep only this SKILL.md.
+4. **Vibe-Coding & Reverse-Engineering Protocol** — When implementing, use public guides to understand and reconstruct features surgically. Translate requirements into working code, verify, and keep Git hygiene clean.
+5. **Token Economy** — Prefer shallow clones, surgical reads, and high signal-to-token ratio. Cache useful facts about specific tutorials once discovered.
+6. **Jurisprudential Canons** — Apply necessity, proportionality, and contextual interpretation. Prefer the simplest sufficient tutorial path; discard over-engineering.
+7. **Karpathy Standards** — Simplicity first, surgical changes, goal-driven execution.
+
+Follow the full `RULES.md` on every use.
 
 ## Source
 
