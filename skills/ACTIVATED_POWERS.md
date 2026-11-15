@@ -63,6 +63,7 @@ All resources below are treated as active standing capabilities for this workspa
 - **Plotly Dash** (`plotly/dash`) — Reactive analytical enterprise dashboards
 
 ## API & Tool Catalogs (Active Reference)
+- **hoppscotch/hoppscotch** — Open-source API development ecosystem (REST, GraphQL, WebSocket, SSE, Socket.IO, MQTT). Lightweight Postman/Insomnia alternative. Web + Desktop + CLI, self-hostable, collections, environments, scripts, teams. Installed: `skills/hoppscotch/`.
 - **cporter202/agentic-ai-apis** — 2,000+ agent / model / MCP APIs
 - **cporter202/scraping-apis-for-devs** — 2,622 production scraping APIs
 - **cporter202/best-apis-for-lead-gen**
