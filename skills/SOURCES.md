@@ -68,6 +68,10 @@ Caveat emptor (Grok is responsible)
 - **gradio-app/gradio** — Easy ML model demos and web UIs.
 - **plotly/dash** — Analytical web apps in pure Python.
 
+## API Clients & Developer Tools
+
+- **hoppscotch/hoppscotch** — Open-source API development ecosystem (REST, GraphQL, WebSocket, SSE, Socket.IO, MQTT). Lightweight, self-hostable alternative to Postman/Insomnia. Web + Desktop + CLI. Installed at `skills/hoppscotch/`.
+
 ## Related GitHub Users / Orgs
 
 - **Anil-matcha** — Generative AI tooling, open-source agent/workspace projects, media generation apps.
