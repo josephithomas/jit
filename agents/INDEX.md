@@ -37,4 +37,7 @@ Use this when matching a user need to an existing agent pattern.
 - Recipe Recommendation Agent (17)
 - PII Sanitization Agent (21)
 
+**Self-hosted Multi-Bot Systems**
+- Superbot — open-source Grok Bot alternative (team of named bots + shared computer + memory + harness adapters). See agents/README.md and https://github.com/josephithomas/superbot
+
 Source of truth for implementations: https://github.com/ashishpatel26/500-AI-Agents-Projects/tree/main/agents
