@@ -61,6 +61,8 @@ Standing integrations include free-claude-code, Skills-Manager, vibe-security-sk
 
 Working agent implementations and patterns catalogued from high-quality public projects (including the 500-AI-Agents-Projects collection).
 
+Also references notable self-hosted multi-bot systems such as **Superbot** (open-source Grok Bot alternative, forked at [josephithomas/superbot](https://github.com/josephithomas/superbot)).
+
 → See [`agents/README.md`](agents/README.md)
 
 ---
