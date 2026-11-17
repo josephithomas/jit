@@ -40,11 +40,14 @@ Use Superbot patterns (durable bots + shared computer + memory files + harness a
 | 20 | Multi-Agent Debate System | LangChain | Research | ⭐⭐⭐ | [source](https://github.com/ashishpatel26/500-AI-Agents-Projects/tree/main/agents/20-multi-agent-debate) |
 | 21 | PII Sanitization Agent | — | Security / Compliance | — | [source](https://github.com/ashishpatel26/500-AI-Agents-Projects/tree/main/agents/21-pii-sanitization-agent) |
 
-## Usage Policy
+## Usage Policy (Standing Mandates Apply)
 
-- Do not copy entire third-party agent codebases into this repo unless actively adapting them.
-- When a need arises, pull the relevant agent pattern, adapt it to Grok / local tools, and place the adapted skill or agent under `skills/` or `agents/`.
-- Prefer converting useful patterns into Grok-compatible `SKILL.md` format for persistence across accounts.
-- Notable full projects (like Superbot) are forked under the josephithomas account and linked here for reference; adapt selectively rather than vendoring the whole tree.
+This catalog and every addition to it operate under the permanent rules in `RULES.md`:
+
+- **GitHub Space Anchor**: All cloning, forking, hosting, and vibe-coding work stays anchored to `https://github.com/josephithomas/jit`. The Superbot fork lives at `josephithomas/superbot` and is referenced from here.
+- **No full vendoring**: Do not copy entire third-party agent codebases into this repo unless actively adapting them. Superbot is referenced and forked for study; selective pattern extraction only.
+- **Adaptation path**: When a need arises, pull the relevant pattern, adapt it to Grok / local tools / free-token stack, and place the adapted skill or agent under `skills/` or `agents/`.
+- **Prefer SKILL.md**: Convert useful patterns into Grok-compatible `SKILL.md` format for persistence across accounts.
+- **Vibe-coding + reverse-engineering protocol**: Any future extraction or adaptation of Superbot patterns (or any other external source) must follow the coding & reverse-engineering protocol in `RULES.md` and **must be audited with `skills/vibe-security-skill`** before shipping.
 
 Last updated: 2026-11-17
