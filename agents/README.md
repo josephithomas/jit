@@ -6,6 +6,14 @@ Source site: https://ashishpatel26.github.io/500-AI-Agents-Projects/
 
 When a need matches one of these agents, adapt the pattern into a Grok-compatible skill or runnable form and keep the adapted version under this repo.
 
+## Notable External Multi-Bot / Self-Hosted Systems
+
+| Project | Description | Language / Stack | Local Fork | Upstream |
+|---------|-------------|------------------|------------|----------|
+| **Superbot** | Open-source, self-hosted Grok Bot alternative. Team of named AI Bots, each with job, memory, and real computer (screen/browser). Harness-agnostic (Claude Code, Codex, Pi adapters). Routines, bot-to-bot, approvals planned. | Rust (server + adapters), web UI | [josephithomas/superbot](https://github.com/josephithomas/superbot) | [davidondrej/superbot](https://github.com/davidondrej/superbot) |
+
+Use Superbot patterns (durable bots + shared computer + memory files + harness adapters) when building persistent multi-agent teams that need computer use or long-running autonomy.
+
 ## Agent Index
 
 | # | Agent | Framework | Industry | Difficulty | Source |
@@ -37,5 +45,6 @@ When a need matches one of these agents, adapt the pattern into a Grok-compatibl
 - Do not copy entire third-party agent codebases into this repo unless actively adapting them.
 - When a need arises, pull the relevant agent pattern, adapt it to Grok / local tools, and place the adapted skill or agent under `skills/` or `agents/`.
 - Prefer converting useful patterns into Grok-compatible `SKILL.md` format for persistence across accounts.
+- Notable full projects (like Superbot) are forked under the josephithomas account and linked here for reference; adapt selectively rather than vendoring the whole tree.
 
-Last updated: 2026-11-09
+Last updated: 2026-11-17
