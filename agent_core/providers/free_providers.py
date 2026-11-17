@@ -1,12 +1,17 @@
 """Unified Multi-Provider AI Client for Free Token Providers.
 
 Supports seamless failover across:
+0. FreeLLMAPI (local/self-hosted gateway — 87 free providers, 1,313 endpoints, smart routing)
 1. GroqCloud (Free Tier: Llama 3.3 70B, Llama 3.1 8B, Gemma 2)
 2. Google AI Studio / Gemini (Free Tier: Gemini 2.0 Flash, 1.5 Flash)
 3. OpenRouter Free Tier (deepseek/deepseek-r1:free, llama-3.3-70b:free)
 4. GitHub Models (Free Tier via personal access token: gpt-4o-mini, phi-3.5)
 5. Hugging Face Serverless API (Free Tier)
 6. Local Ollama (100% offline, zero-token cost fallback)
+
+FreeLLMAPI (https://github.com/tashfeenahmed/freellmapi) is the recommended
+primary gateway for vibe coding. Point coding agents at it with:
+  npx freellmapi setup-claude --url http://localhost:3001 --api-key <key>
 """
 
 import os
@@ -23,7 +28,22 @@ class FreeAIProviderRouter:
     """Manages and queries free token providers with automatic failover."""
 
     def __init__(self):
+        # FreeLLMAPI is intentionally first: one /v1 endpoint that already
+        # aggregates dozens of free providers with smart routing + failover.
+        freellmapi_url = os.environ.get(
+            "FREELLMAPI_URL", "http://localhost:3001/v1/chat/completions"
+        )
+        freellmapi_key = os.environ.get("FREELLMAPI_API_KEY", "")
+
         self.providers = [
+            {
+                "name": "FreeLLMAPI",
+                "env_key": "FREELLMAPI_API_KEY",  # optional if gateway allows unauthenticated local use
+                "url": freellmapi_url,
+                "default_model": os.environ.get("FREELLMAPI_MODEL", "auto"),
+                "type": "openai_compatible",
+                "optional_key": True,  # local gateway may not require a key
+            },
             {
                 "name": "Groq",
                 "env_key": "GROQ_API_KEY",
@@ -72,16 +92,19 @@ class FreeAIProviderRouter:
         # Order providers with preferred one first if requested
         candidates = list(self.providers)
         if preferred_provider:
-            candidates.sort(key=lambda p: 0 if p["name"].lower() == preferred_provider.lower() else 1)
+            candidates.sort(
+                key=lambda p: 0 if p["name"].lower() == preferred_provider.lower() else 1
+            )
 
         errors = []
         for provider in candidates:
             provider_name = provider["name"]
             key_name = provider["env_key"]
             api_key = os.environ.get(key_name) if key_name else ""
+            optional_key = provider.get("optional_key", False)
 
             # Skip if key is required but missing
-            if key_name and not api_key:
+            if key_name and not api_key and not optional_key:
                 continue
 
             try:

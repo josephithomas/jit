@@ -6,12 +6,56 @@ Designed specifically for standalone Windows executables (`.exe`), headless back
 
 ---
 
+## 🌟 0. FreeLLMAPI — Recommended Primary Gateway (Vibe Coding)
+
+**[tashfeenahmed/freellmapi](https://github.com/tashfeenahmed/freellmapi)** is the preferred unified free-token layer for this repository.
+
+- **~10.1 billion tokens/month** aggregated across free tiers  
+- **87 free LLM providers** / **1,313 free model endpoints**  
+- Single OpenAI-compatible `/v1` endpoint + smart routing + automatic failover  
+- Encrypted key storage, usage tracking, decision models, and a rich dashboard  
+- Official CLI that configures Claude Code, Codex, Cline, OpenCode, Cursor, Aider, Continue, Goose, Roo, Pi, and many more in one command
+
+### Quick start with FreeLLMAPI
+
+1. Install / run the gateway (Docker or desktop app — see upstream docs).
+2. Point any coding agent at it:
+
+```bash
+# Claude Code
+npx freellmapi setup-claude --url http://localhost:3001 --api-key <your-unified-key>
+
+# Codex
+npx freellmapi setup-codex --url http://localhost:3001 --api-key <your-unified-key>
+
+# Cline / OpenCode / Cursor / Aider / Continue / Goose / Pi / ...
+npx freellmapi setup-cline --url http://localhost:3001 --api-key <your-unified-key>
+npx freellmapi setup-opencode --url http://localhost:3001 --api-key <your-unified-key>
+npx freellmapi setup-cursor --url http://localhost:3001 --api-key <your-unified-key>
+npx freellmapi list   # see all supported tools
+```
+
+Environment variables used by this repo’s router:
+
+| Variable | Purpose |
+|----------|---------|
+| `FREELLMAPI_URL` | Full chat-completions URL (default `http://localhost:3001/v1/chat/completions`) |
+| `FREELLMAPI_API_KEY` | Unified API key from the FreeLLMAPI dashboard |
+| `FREELLMAPI_MODEL` | Model id or `auto` (default) |
+
+FreeLLMAPI becomes the **first** provider tried by `FreeAIProviderRouter`. Direct Groq / Gemini / OpenRouter / Ollama remain as automatic fallbacks.
+
+Upstream: https://github.com/tashfeenahmed/freellmapi  ·  https://freellmapi.co
+
+---
+
 ## 🌟 1. Massive Sources of Free Token Providers
 
 All agents built with this framework tap into generous, zero-cost API tiers with automatic failover routing:
 
 | Provider | Free Models Included | Free Allowance / Rate Limits | Best Use Case |
 | :--- | :--- | :--- | :--- |
+| **FreeLLMAPI (recommended)** | 1,313 endpoints from 87 providers | Aggregated free tiers (~10.1B tokens/mo) | Vibe coding, multi-harness agents, smart routing |
 | **Google AI Studio (Gemini)** | `gemini-2.0-flash`, `gemini-1.5-flash`, `gemini-1.5-pro` | **15 RPM**, 1,000,000 TPM, 1,500 requests/day free | Complex reasoning, massive context (1M+ tokens), multimodal |
 | **GroqCloud** | `llama-3.3-70b-versatile`, `llama-3.1-8b-instant`, `gemma2-9b-it` | **30 RPM**, 14,400 requests/day free, 300+ tok/s | Lightning-fast background tool loops & instant responses |
 | **OpenRouter Free Tier** | `deepseek/deepseek-r1:free`, `meta-llama/llama-3.3-70b-instruct:free`, `mistralai/mistral-7b:free` | **200 requests/day** on all `:free` models | Frontier reasoning (DeepSeek R1) & diverse open models |
@@ -22,48 +66,22 @@ All agents built with this framework tap into generous, zero-cost API tiers with
 
 ---
 
-## 🚀 2. Free Multi-Harness Coding Agents (via free-claude-code)
+## 🚀 2. Free Multi-Harness Coding Agents
 
-For full **Claude Code**, **Codex**, **OpenCode**, **Cline**, **Pi**, **Aider**, **Antigravity**, **VS Code Chat**, and other coding harnesses running on free / low-cost providers, this project now officially integrates and recommends:
+### Preferred path: FreeLLMAPI CLI
+
+Use the official FreeLLMAPI CLI (shown above) to wire Claude Code, Codex, Cline, OpenCode, Cursor, Aider, Continue, Goose, Roo Code, Pi, and others to a single free-token gateway with automatic failover.
+
+### Complementary path: free-claude-code
+
+For full **Claude Code**, **Codex**, **OpenCode**, **Cline**, **Pi**, **Aider**, **Antigravity**, **VS Code Chat**, and other coding harnesses, this project also integrates:
 
 **[Alishahryar1/free-claude-code](https://github.com/Alishahryar1/free-claude-code)** (FCC)
 
-### What free-claude-code adds
-
-- Routes any of **12+ supported harnesses** to models from **60+ providers** (free tiers, subscription, local, custom).
-- **1.3B+ free tokens** availability (subject to provider limits and TOS).
-- Native streaming, tool use, and interleaved thinking preserved.
-- Automatic retries, rate-limit handling, concurrency control, multi-key rotation, and model/provider fallback.
-- Works from terminal, desktop apps, IDE extensions, phone (Discord/Telegram + voice notes), and browser (native sessions).
-- Token optimization via RTK + Headroom.
-- Chat Completions ingress + native Gemini egress support.
-
-### Quick install (macOS / Linux)
-
-```bash
-curl -fsSL "https://raw.githubusercontent.com/Alishahryar1/free-claude-code/main/scripts/install.sh" | sh
-```
-
-### Quick install (Windows PowerShell)
-
-```powershell
-& ([scriptblock]::Create((irm "https://raw.githubusercontent.com/Alishahryar1/free-claude-code/main/scripts/install.ps1")))
-```
-
-After install, start the FCC server / tray app and configure a free provider (e.g. NVIDIA NIM, OpenRouter free models, or local). Then launch:
-
-```bash
-fcc-claude      # Claude Code
-fcc-codex       # Codex
-fcc-opencode    # OpenCode
-fcc-cline       # Cline
-fcc-pi          # Pi
-# ... and other harnesses
-```
-
-FCC is complementary to the built-in `FreeAIProviderRouter` in this repo:
+FCC is complementary to both FreeLLMAPI and the built-in `FreeAIProviderRouter`:
+- Use **FreeLLMAPI** as the unified free-tier backend (recommended).
 - Use **agent_core** free providers for lightweight background / custom agents.
-- Use **free-claude-code** when you need full-featured coding harnesses (Claude Code style tool loops, IDE integration, etc.) on free tokens.
+- Use **free-claude-code** when you want its extra harness-specific features on top of free tokens.
 
 ---
 
@@ -72,7 +90,7 @@ FCC is complementary to the built-in `FreeAIProviderRouter` in this repo:
 ```
 agent_core/
 ├── providers/
-│   └── free_providers.py    # Auto-failover client across Groq, Gemini, OpenRouter, GitHub, Ollama
+│   └── free_providers.py    # Auto-failover client (FreeLLMAPI first, then Groq/Gemini/…/Ollama)
 ├── harness/
 │   └── agent_daemon.py      # Background execution loop, persistent memory, tool-calling engine
 ├── packaging/
@@ -83,11 +101,12 @@ agent_core/
 ```
 
 ### Key Capabilities
-- **Automatic Fallback Routing**: If Groq hits a rate limit, the router immediately fails over to Gemini, then OpenRouter, then GitHub Models, then local Ollama. The agent neverhalts.
+- **FreeLLMAPI-first routing**: One OpenAI-compatible endpoint that already aggregates dozens of free providers.
+- **Automatic Fallback Routing**: If FreeLLMAPI is unavailable, the router falls through to Groq → OpenRouter → GitHub Models → Gemini → local Ollama. The agent neverhalts.
 - **Persistent State**: Execution history, learned micro-skills, and goals are stored in local JSON/SQLite to survive reboots.
 - **Background Daemon Mode**: Runs in a separate daemon thread without blocking host applications or freezing the OS.
 - **Extensible Tool Registry**: Add custom file, network, OS, or calculation tools with a single line: `agent.register_tool(name, func)`.
-- **Multi-harness free coding** (via free-claude-code integration above).
+- **Multi-harness free coding** via FreeLLMAPI CLI + free-claude-code.
 
 ---
 

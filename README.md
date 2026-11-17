@@ -29,12 +29,26 @@ This repository is the central hub for:
 Production-ready framework for autonomous background agents that run entirely on free provider tiers with automatic failover.
 
 **Key features**
-- Auto-failover across Gemini, Groq, OpenRouter free, GitHub Models, Hugging Face, Cloudflare, and local Ollama
+- **FreeLLMAPI-first** (recommended): one OpenAI-compatible gateway aggregating 87 free providers / 1,313 endpoints with smart routing
+- Auto-failover across FreeLLMAPI → Groq → OpenRouter free → GitHub Models → Gemini → local Ollama
 - Persistent state (JSON/SQLite) that survives reboots
 - Background daemon mode + Windows standalone `.exe` packaging
 - Extensible tool registry
+- Official CLI integration for Claude Code, Codex, Cline, OpenCode, Cursor, Aider, and more
 
 → Full documentation: **[agent_core/README.md](agent_core/README.md)**
+
+### FreeLLMAPI (vibe-coding gateway)
+
+```bash
+# Point coding agents at your FreeLLMAPI instance
+npx freellmapi setup-claude --url http://localhost:3001 --api-key <key>
+npx freellmapi setup-codex  --url http://localhost:3001 --api-key <key>
+npx freellmapi setup-cline  --url http://localhost:3001 --api-key <key>
+npx freellmapi list
+```
+
+Upstream: [tashfeenahmed/freellmapi](https://github.com/tashfeenahmed/freellmapi)
 
 ---
 
