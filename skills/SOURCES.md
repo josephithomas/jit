@@ -68,6 +68,7 @@ Caveat emptor (Grok is responsible)
 - **streamlit/streamlit** — Rapid data apps and dashboards in Python.
 - **gradio-app/gradio** — Easy ML model demos and web UIs.
 - **plotly/dash** — Analytical web apps in pure Python.
+- **davidondrej/superbot** (fork: **josephithomas/superbot**) — Open-source, self-hosted Grok Bot alternative. Team of named durable bots, per-bot memory (plain files), shared computer with per-bot screens/browser, harness-agnostic adapters (Claude Code, Codex, Pi), routines, bot-to-bot. Rust server + web. Reference / pattern source only — do not vendor the full tree. Any future adaptation of its patterns into skills or agent_core must follow the vibe-coding + reverse-engineering protocol and be audited with `skills/vibe-security-skill` before shipping. Catalogued in `agents/`.
 
 ## API Clients & Developer Tools
 
