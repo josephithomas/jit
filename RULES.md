@@ -11,10 +11,20 @@ These instructions are permanent, universal, and apply to EVERY project, session
 
 ---
 
-## 2. GitHub Space Anchor: `github.com/josephithomas/jit`
-- **Central Repository Hub**: Anything that requires GitHub space—including cloning, code hosting, branch management, vibe-coding workflows, and project syndication—must be anchored to:
-  **[https://github.com/josephithomas/jit](https://github.com/josephithomas/jit)**
+## 2. GitHub Space Anchor & Standing Hub Instruction
+- **Central Repository Hub**: https://github.com/josephithomas/jit is the **default and preferred GitHub space** for all of the following:
+  - Skill cloning and skill storage
+  - Working space / temporary project work
+  - Vibe-coding workflows and rapid prototypes
+  - Pulling information and reference material from GitHub
+  - Storing content, generated skills, and project artifacts
+- Anything that requires GitHub space (cloning, code hosting, branch management, project syndication) should be anchored here by default unless the user explicitly directs otherwise.
 - **Repository Hygiene**: Never commit raw massive binaries, installers (>100MB), or ephemeral build directories (`build/`, `dist/`, `Output/`). All packaging targets must be strictly filtered by `.gitignore`.
+
+### Approved Public API Sources
+When free / public APIs are needed, prefer sources from:
+- https://publicapis.dev/
+- https://github.com/topics/public-api
 
 ---
 
