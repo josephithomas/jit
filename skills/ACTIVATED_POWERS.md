@@ -1,7 +1,7 @@
 # Activated Powers — Full List
 
 **Status: ALL LISTED RESOURCES ACTIVE**  
-Date: 2026-11-17
+Date: 2026-11-24
 
 All resources below are treated as active standing capabilities for this workspace and repository. Core methodologies are internalized; all installed skills are packaged under `skills/` for cross-machine reproducibility.
 
@@ -16,7 +16,7 @@ All resources below are treated as active standing capabilities for this workspa
 ## Engineering & Skill Libraries (Active)
 - **mattpocock/skills** — Practical pair-programming: grill-me, domain-modeling, to-spec, TDD
 - **shanraisshan/claude-code-best-practice** — Terminal-first agent engineering workflows & orchestration
-- **affaan-m/ECC** — 314+ skills, 71 agents, hooks, memory, AgentShield
+- **affaan-m/ECC** — 314+ skills, 71 agents, hooks, memory, AgentShield. **Install path (do not vendor):** see [`docs/affaan-powers.md`](../docs/affaan-powers.md)
 - **sickn33/agentic-awesome-skills** — 2,957+ catalog playbooks (v20.8.0) + AAS Core. Installed entry: `skills/agentic-awesome-skills/`.
 - **ruvnet/ruflo** — Multi-agent swarms, 60+ agent types, 314 MCP tools, self-learning
 - **nyldn/claude-octopus** — Multi-AI orchestration, personas, workflows
