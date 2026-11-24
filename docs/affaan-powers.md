@@ -2,6 +2,8 @@
 
 No fork required. These are the practical ways to get Affaan Mustafa’s agent harness, multi-agent orchestration, and OSINT tooling into the jit ecosystem.
 
+**Single source of truth** for install commands. Keep this file current; do not vendor the full upstream trees.
+
 ## 1. ECC (highest priority — the real powerhouse)
 
 **What it is**: Agent harness / skills / memory / security / research-first system used with Claude Code, Cursor, Codex, OpenCode, etc. ~310k stars.
@@ -54,6 +56,14 @@ Less central for pure desktop agent work; useful when you need real-time person/
 1. Install / enable **ECC** first.
 2. Add the multi-agent orchestration tool that fits your current session style.
 3. Reach for JARVIS only when the OSINT use-case appears.
+
+## Complementary free-token layer
+
+Pair these with the free-token stack already in this repo:
+
+- **FreeLLMAPI** (recommended primary gateway) — see `agent_core/README.md`
+- **agent_core** auto-failover router (FreeLLMAPI → Groq → OpenRouter free → GitHub Models → Gemini → Ollama)
+- **free-claude-code** skill under `skills/free-claude-code/` for multi-harness routing
 
 ## Repo hygiene note
 We deliberately do **not** vendor the full ECC tree via subtree/submodule. It is large and the official plugin path is cleaner and stays up to date. The same applies to JARVIS.

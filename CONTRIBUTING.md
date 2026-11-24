@@ -1,38 +1,30 @@
-# Contribution Guidelines
+# Contributing to jit
 
-The Awesome Agents curates content and projects using or supporting AI Agents ecosystem. The contribution needs to be open source. The list is curated so that only the best content is included. This means that not all content will be listed. The listed content should be high-quality, demonstrate traction, be maintained, and provide clear added value.
+This is a **personal agent workspace and skills hub**, not a generic open-source library or awesome-list mirror. Contributions are welcome when they raise the signal-to-noise ratio for real agent work.
 
-We do not list content that is:
+## What belongs here
 
-- brand new repo without demonstrated traction.
-- not in English.
-- not related to Agentic frameworks.
-- not maintained anymore.
-- not online anymore.
-- not open source.
-- not adding value to existing content.
+- Skills in the canonical form `skills/<name>/SKILL.md`
+- Working agent patterns under `agents/`
+- Improvements to `agent_core/` (free-token routing, daemon, packaging)
+- High-signal docs that help someone *use* the hub faster (install paths, not full vendor trees)
+- Educational / library tooling that already lives in this ecosystem (OmniSort, PDF suite, Book Wishlist, Titus SkillForge)
 
-When adding a new item, please place it at the _bottom_ of the list.
+## What does **not** belong here
 
-Submit a PR, not an issue. Any PR that does not follow the guidelines will be automatically closed.
+- Full upstream trees of large projects (ECC, JARVIS, etc.) — document the official install path instead (see `docs/affaan-powers.md` and `RULES.md`)
+- Massive binaries, installers, or build artifacts (`build/`, `dist/`, `Output/`) — they are gitignored for a reason
+- Low-traction or unmaintained “awesome” entries with no clear value over what already exists
+- Parallel skill trees outside `skills/`
 
-Given the rise of agent submissions, those criteria are non-negotiable, managed and applied automatically. Criteria that most often trigger closing a PR without merging it: brand new repo with no history, brand new user, or wrong place in the list.
+## How to contribute
 
-## Adding something to awesome agents
+1. Prefer small, surgical PRs with a clear outcome.
+2. For skills: place them under `skills/<name>/SKILL.md` and update `skills/SOURCES.md` / `skills/ACTIVATED_POWERS.md` if they are standing capabilities.
+3. For Affaan-related tooling: update only `docs/affaan-powers.md` (single source of truth for install commands).
+4. Run the existing CI expectations (flake8 + pytest) before pushing.
+5. Follow the standing principles in [`RULES.md`](RULES.md) — results first, token economy, no bloat.
 
-If you have something awesome to contribute to an awesome list, this is how you do it.
+## Questions
 
-You'll need a [GitHub account](https://github.com/join)!
-
-1. Access the awesome list's GitHub page. For example: https://github.com/kyrolabs/awesome-agents
-2. Click on the `readme.md` file: ![Step 2 Click on Readme.md](https://cloud.githubusercontent.com/assets/170270/9402920/53a7e3ea-480c-11e5-9d81-aecf64be55eb.png)
-3. Now click on the edit icon. ![Step 3 - Click on Edit](https://cloud.githubusercontent.com/assets/170270/9402927/6506af22-480c-11e5-8c18-7ea823530099.png)
-4. You can start editing the text of the file in the in-browser editor. Make sure you follow guidelines above. You can use [GitHub Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/). ![Step 4 - Edit the file](https://cloud.githubusercontent.com/assets/170270/9402932/7301c3a0-480c-11e5-81f5-7e343b71674f.png)
-5. Say why you're proposing the changes, and then click on "Propose file change". ![Step 5 - Propose Changes](https://cloud.githubusercontent.com/assets/170270/9402937/7dd0652a-480c-11e5-9138-bd14244593d5.png)
-6. Submit the [pull request](https://help.github.com/articles/using-pull-requests/)!
-
-## Updating your Pull Request
-
-Sometimes, a maintainer of an awesome list will ask you to edit your Pull Request before it is included. This is normally due to spelling errors or because your PR didn't match the awesome-\* list guidelines.
-
-[Here](https://github.com/RichardLitt/knowledge/blob/master/github/amending-a-commit-guide.md) is a write up on how to change a Pull Request, and the different ways you can do that.
+Open an issue or PR with a concrete objective. Vague “add more agents” requests will be closed; specific, usable patterns will be merged.

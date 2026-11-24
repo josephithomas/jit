@@ -8,6 +8,7 @@ This repository is the central hub for:
 - A curated, installable **skills centre** for coding agents
 - Working catalogs of agent patterns
 - Educational / library utilities (OmniSort, PDF tools, Book Wishlist, Titus SkillForge)
+- High-signal external harnesses (Affaan ECC, multi-agent swarms, FreeLLMAPI)
 
 ---
 
@@ -18,6 +19,7 @@ This repository is the central hub for:
 | **Agent Framework** | [`agent_core/`](agent_core/) | Free-token background agents, failover routing, Windows `.exe` packaging |
 | **Skills Centre** | [`skills/`](skills/) | Single source of truth for installable agent skills (`SKILL.md` format) |
 | **Agents Catalog** | [`agents/`](agents/) | Working patterns adapted from real agent projects |
+| **Affaan Powers** | [`docs/affaan-powers.md`](docs/affaan-powers.md) | ECC plugin, claude-swarm (both flavors), JARVIS — install paths only |
 | **Educational Tools** | Root + `TitusSkillForge/` | OmniSort Pro, Professional PDF Suite, Book Wishlist, SkillForge |
 | **Rules & Principles** | [`RULES.md`](RULES.md) | Standing operating principles and token economy rules |
 | **Curated Agent List** | [`docs/AWESOME_AGENTS.md`](docs/AWESOME_AGENTS.md) | Large external “Awesome Agents” reference list |
@@ -52,7 +54,24 @@ Upstream: [tashfeenahmed/freellmapi](https://github.com/tashfeenahmed/freellmapi
 
 ---
 
-## 2. Skills Centre
+## 2. Affaan Powers (ECC · claude-swarm · JARVIS)
+
+Highest-leverage external harnesses. **Do not vendor the full trees** — use the official plugin / install paths so `jit` stays clean.
+
+| Power | What you get | How |
+|-------|--------------|-----|
+| **ECC** | Agent harness, skills, memory, security, research-first patterns (~310k★) | Claude Code plugin: `/plugin marketplace add https://github.com/affaan-m/ECC` then `/plugin install ecc` |
+| **claude-swarm (affaan-m)** | Task decomposition + parallel agents + quality gate | `git clone https://github.com/affaan-m/claude-swarm && pip install -e .` |
+| **claude-swarm (PyPI)** | Session coordination, file claims, message bus | `pip install claude-swarm` |
+| **JARVIS** | OSINT / autonomous scraping pipeline | Clone only when the OSINT use-case appears |
+
+Full install commands and hygiene notes: **[docs/affaan-powers.md](docs/affaan-powers.md)**
+
+Recommended order: **ECC first** → the swarm flavor that matches your session style → JARVIS only if needed.
+
+---
+
+## 3. Skills Centre
 
 There is **one** place for skills:
 
@@ -71,7 +90,7 @@ Standing integrations include free-claude-code, Skills-Manager, vibe-security-sk
 
 ---
 
-## 3. Agents Catalog
+## 4. Agents Catalog
 
 Working agent implementations and patterns catalogued from high-quality public projects (including the 500-AI-Agents-Projects collection).
 
@@ -81,7 +100,7 @@ Also references notable self-hosted multi-bot systems such as **Superbot** (open
 
 ---
 
-## 4. Educational & Library Tools
+## 5. Educational & Library Tools
 
 | Tool | Description |
 |------|-------------|
@@ -94,7 +113,7 @@ These live primarily at the repository root and under `TitusSkillForge/`.
 
 ---
 
-## 5. Operating Principles
+## 6. Operating Principles
 
 See **[RULES.md](RULES.md)** for the full standing rules, including:
 
