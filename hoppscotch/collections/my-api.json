@@ -1,0 +1,45 @@
+{
+    "v":  2,
+    "name":  "ecc",
+    "folders":  [
+
+                ],
+    "requests":  [
+                     {
+                         "v":  "3",
+                         "name":  "Check josephithomas/ecc Fork",
+                         "method":  "GET",
+                         "endpoint":  "\u003c\u003cGITHUB_API\u003e\u003e/repos/josephithomas/ecc",
+                         "params":  [
+
+                                    ],
+                         "headers":  [
+                                         {
+                                             "key":  "User-Agent",
+                                             "value":  "hopp-cli",
+                                             "active":  true
+                                         }
+                                     ],
+                         "preRequestScript":  "",
+                         "testScript":  "pw.test(\"Status is 200\", () =\u003e {\n  pw.expect(pw.response.status).toBe(200);\n});\npw.test(\"Repo is a fork of affaan-m/ECC\", () =\u003e {\n  pw.expect(pw.response.body.parent.full_name).toBe(\"affaan-m/ECC\");\n});",
+                         "auth":  {
+                                      "authType":  "none",
+                                      "authActive":  true
+                                  },
+                         "body":  {
+                                      "contentType":  null,
+                                      "body":  null
+                                  },
+                         "requestVariables":  [
+
+                                              ]
+                     }
+                 ],
+    "auth":  {
+                 "authType":  "inherit",
+                 "authActive":  true
+             },
+    "headers":  [
+
+                ]
+}

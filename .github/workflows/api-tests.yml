@@ -1,0 +1,12 @@
+name: API tests
+on: [push, pull_request]
+jobs:
+  hopp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm i -g @hoppscotch/cli
+      - run: hopp test ./hoppscotch/collections/my-api.json --env ./hoppscotch/environments/ci.env.json --reporter-junit ./report.xml
