@@ -20,7 +20,7 @@ This repository is the central hub for:
 | **Skills Centre** | [`skills/`](skills/) | Single source of truth for installable agent skills (`SKILL.md` format) |
 | **Agents Catalog** | [`agents/`](agents/) | Working patterns adapted from real agent projects |
 | **Affaan Powers** | [`docs/affaan-powers.md`](docs/affaan-powers.md) | ECC plugin, claude-swarm (both flavors), JARVIS — install paths only |
-| **Educational Tools** | Root + `TitusSkillForge/` | OmniSort Pro, Professional PDF Suite, Book Wishlist, SkillForge |
+| **Desktop Apps** | [`apps/`](apps/) + `TitusSkillForge/` | OmniSort Pro, Professional PDF Suite, Book Wishlist, SkillForge |
 | **Rules & Principles** | [`RULES.md`](RULES.md) | Standing operating principles and token economy rules |
 | **Curated Agent List** | [`docs/AWESOME_AGENTS.md`](docs/AWESOME_AGENTS.md) | Large external “Awesome Agents” reference list |
 
@@ -100,16 +100,18 @@ Also references notable self-hosted multi-bot systems such as **Superbot** (open
 
 ---
 
-## 5. Educational & Library Tools
+## 5. Desktop Apps (Educational & Library Tools)
 
-| Tool | Description |
-|------|-------------|
-| **OmniSort Pro** | Advanced file/folder sorting and organization utilities |
-| **TSTC Professional PDF Suite** | PDF tools for library and academic use |
-| **Book Wishlist** | Book wishlist and resource management |
-| **Titus SkillForge** | Skill creator + definition tooling |
+Each app is self-contained under `apps/<name>/` with its own `requirements.txt` and its own build files (PyInstaller `.spec`, Inno Setup `.iss`, `.bat` scripts). Build scripts resolve paths relative to their own folder, so run them from inside the app folder.
 
-These live primarily at the repository root and under `TitusSkillForge/`.
+| App | Folder | Stack | Run |
+|-----|--------|-------|-----|
+| **Titus OmniSort Pro** — file/folder sorting, duplicate finder, rules, undo | [`apps/omnisort/`](apps/omnisort/) | PyQt6 | `pip install -r apps/omnisort/requirements.txt && cd apps/omnisort && python run_sorter.py` |
+| **TSTC Professional PDF Suite** — PDF editing, OCR, conversion, AI assistant | [`apps/pdf_suite/`](apps/pdf_suite/) | customtkinter | `pip install -r apps/pdf_suite/requirements.txt && cd apps/pdf_suite && python App.py` |
+| **Book Wishlist Pro** — book wishlist and resource management | [`apps/book_wishlist/`](apps/book_wishlist/) | tkinter | `pip install -r apps/book_wishlist/requirements.txt && cd apps/book_wishlist && python book_wishlist_app.py` |
+| **Titus SkillForge** — skill creator + definition tooling | [`TitusSkillForge/`](TitusSkillForge/) | see its README | see [`TitusSkillForge/README.md`](TitusSkillForge/README.md) |
+
+The GUI apps need a desktop session; they cannot run headless. Windows executables are built with `build_exe.bat` (PDF Suite) and `build_omnisort_release.bat` (OmniSort) from inside the app folder.
 
 ---
 
@@ -125,16 +127,44 @@ See **[RULES.md](RULES.md)** for the full standing rules, including:
 
 ---
 
+## Repository Layout
+
+```text
+jit/
+├── agent_core/        Free-token background agent framework (stdlib only)
+├── agents/            Catalog of agent patterns
+├── apps/
+│   ├── omnisort/      OmniSort Pro (sorter_app/, run_sorter.py, build files)
+│   ├── pdf_suite/     PDF Suite (App.py, studio_engines.py, studio_frames.py, build files)
+│   └── book_wishlist/ Book Wishlist Pro (book_wishlist_app.py, setup.py, build files)
+├── docs/              Guides (Affaan powers, awesome-agents list)
+├── hoppscotch/        API test collection + environments (run in CI)
+├── skills/            Skills centre: skills/<name>/SKILL.md
+├── tests/             pytest suite (currently covers OmniSort core)
+├── TitusSkillForge/   Skill creator tooling
+├── AGENTS.md          Instructions for AI coding agents (CLAUDE.md points here)
+├── RULES.md           Standing operating principles
+└── requirements.txt   Dev/CI dependencies (pytest, flake8)
+```
+
 ## Development
 
 ```bash
-# Clone
 git clone https://github.com/josephithomas/jit.git
 cd jit
+python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
+pip install -r requirements.txt                      # pytest + flake8
 
-# CI runs flake8 + pytest on every push to main
-# See .github/workflows/python-app.yml
+# Run the tests (stdlib only; no GUI libraries required)
+pytest
+
+# Lint exactly like CI (hard-fail on syntax errors / undefined names)
+flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
 ```
+
+CI (`.github/workflows/python-app.yml`) runs flake8 + pytest on every push and PR to `main`. `api-tests.yml` runs the Hoppscotch collection.
+
+**Using this repo with an AI coding agent?** Read [`AGENTS.md`](AGENTS.md) first.
 
 ---
 

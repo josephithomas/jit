@@ -1,0 +1,15 @@
+# TSTC Professional PDF Suite (customtkinter desktop app)
+customtkinter
+PyMuPDF
+pypdf
+pdf2docx
+pdf2image
+pytesseract
+python-docx
+python-pptx
+openpyxl
+Pillow
+requests
+# Windows-only (text-to-speech / Office automation); the app runs without it
+pywin32; sys_platform == "win32"
+# Build-only (executable): pyinstaller

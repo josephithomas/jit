@@ -1,0 +1,4 @@
+# Book Wishlist Pro (tkinter desktop app)
+tkinterdnd2
+keyboard
+# Build-only (MSI via setup.py): cx_Freeze

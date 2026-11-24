@@ -1,0 +1,6 @@
+# Titus OmniSort Pro (PyQt6 desktop app)
+PyQt6
+PyMuPDF
+python-docx
+Pillow
+# Build-only (executable): pyinstaller

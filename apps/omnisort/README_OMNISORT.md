@@ -88,8 +88,10 @@ Titus OmniSort Pro is a 2-in-1 desktop file and folder organization studio built
 
 ## 🚀 How to Launch
 
-Double-click `launch_sorter.bat` or run:
+Double-click `launch_sorter.bat` or, from the repository root, run:
 ```bash
+pip install -r apps/omnisort/requirements.txt
+cd apps/omnisort
 python run_sorter.py
 ```
 

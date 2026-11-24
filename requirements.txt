@@ -1,0 +1,4 @@
+# Dev / CI dependencies. The test suite (tests/) only needs the standard library + pytest.
+# Per-app runtime dependencies live in apps/<app>/requirements.txt.
+pytest
+flake8

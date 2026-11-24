@@ -65,3 +65,6 @@ $RECYCLE.BIN/
 *.log
 
 report.xml
+
+# Runtime user data (Book Wishlist recreates this on first save)
+wishlist_v2.json
