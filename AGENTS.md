@@ -2,6 +2,14 @@
 
 Guidance for AI coding agents working in this repository (Claude Code, Codex, Cursor, Aider, etc.). Humans: see `README.md`.
 
+## Binding rules: `RULES.md`
+`RULES.md` is the standing rulebook for this workspace and **governs all work here**. `CLAUDE.md` imports it so it loads automatically; other agents must read it first. If this file and `RULES.md` disagree, `RULES.md` wins. In practice it means:
+- **Outcome first, autonomous.** Deliver working, verified results. Do not ask for permission on standard tool choices or step-by-step confirmation.
+- **Anchor to this repo.** `https://github.com/josephithomas/jit` is the default GitHub hub for skills, work and artifacts. Commit milestones here with clean Git hygiene.
+- **Verify.** Run tests and confirm execution before presenting a result (commands below).
+- **Loop guard.** Never repeat an identical failing command. Diagnose the root cause and pivot within two attempts.
+- **Token economy.** Use the facts in this file instead of re-discovering them. Read surgical line ranges of large files (`App.py`, `studio_*.py`), not whole files. Skip unused tools. Be concise.
+
 ## What this repo is
 A personal agent workspace and skills hub, plus three Windows-oriented desktop apps. It is **not** a single application. Identify which part you are touching before editing.
 
@@ -46,6 +54,6 @@ App runtime deps are per app: `pip install -r apps/<app>/requirements.txt`. The 
 - Only OmniSort core has tests; PDF Suite, Book Wishlist and `agent_core` are untested.
 
 ## Related docs
-- `RULES.md`: standing operating principles for this workspace
+- `RULES.md`: binding standing rules (see top of this file)
 - `CONTRIBUTING.md`: what belongs in this repo and PR expectations
 - `skills/CENTRE.md`, `skills/SOURCES.md`: skills conventions
