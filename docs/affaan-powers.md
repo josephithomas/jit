@@ -10,13 +10,13 @@ No fork required. These are the practical ways to get Affaan Mustafa’s agent h
 
 **Install (Claude Code / compatible harness)**:
 ```bash
-/plugin marketplace add https://github.com/affaan-m/ECC
-/plugin install ecc
+/plugin marketplace add https://github.com/josephithomas/ecc
+/plugin install ecc@ecc
 ```
 
 Later:
 ```bash
-/plugin update ecc
+/plugin update ecc@ecc
 ```
 
 Official site: https://ecc.tools
