@@ -11,6 +11,8 @@ When a need matches one of these agents, adapt the pattern into a Grok-compatibl
 | Project | Description | Language / Stack | Local Fork | Upstream |
 |---------|-------------|------------------|------------|----------|
 | **Superbot** | Open-source, self-hosted Grok Bot alternative. Team of named AI Bots, each with job, memory, and real computer (screen/browser). Harness-agnostic (Claude Code, Codex, Pi adapters). Routines, bot-to-bot, approvals planned. | Rust (server + adapters), web UI | [josephithomas/superbot](https://github.com/josephithomas/superbot) | [davidondrej/superbot](https://github.com/davidondrej/superbot) |
+| **ECC (Everything Claude Code)** | Agent harness: 71 specialized agents, 314+ skills, hooks, session memory, AgentShield guardrails. Works with Claude Code, Cursor, Codex, OpenCode. | Node/Shell, markdown agents | [josephithomas/ecc](https://github.com/josephithomas/ecc) | [affaan-m/ECC](https://github.com/affaan-m/ECC) |
+| **Hoppscotch** | Open-source API development ecosystem (REST, GraphQL, WebSocket, SSE, Socket.IO, MQTT); web, desktop and CLI. Used by agents to design, test and document APIs while vibe coding. | TypeScript / Vue, Rust (desktop) | installed as `skills/hoppscotch/` | [hoppscotch/hoppscotch](https://github.com/hoppscotch/hoppscotch) |
 
 Use Superbot patterns (durable bots + shared computer + memory files + harness adapters) when building persistent multi-agent teams that need computer use or long-running autonomy.
 

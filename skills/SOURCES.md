@@ -33,7 +33,7 @@ Caveat emptor (Grok is responsible)
 - **titanwings/distilly** — Distills how people think into reusable skills for any agent.
 - **virgiliojr94/book-to-skill** — Converts technical book PDFs into usable Claude Code skills.
 - **topoteretes/cognee** — Open-source AI memory platform for agents (persistent long-term memory).
-- **affaan-m/ECC** — (Engineering / agent-related collection; treat as specialized skill source).
+- **affaan-m/ECC** - Agent harness: 314+ skills, 71 agents, hooks, memory patterns, AgentShield guardrails. Upstream: https://github.com/affaan-m/ECC. Fork: https://github.com/josephithomas/ecc (for study and pattern extraction; do not vendor). Install path: `docs/affaan-powers.md`. Skill stub: `skills/everything-claude-code/`.
 - **Shubhamsaboo/awesome-llm-apps** — Curated list of LLM applications and agent patterns.
 - **paperclipai/paperclip** — Open-source app for managing agents at work.
 - **alibaba/open-code-review** — Battle-tested hybrid code-review tooling and pipelines.
@@ -72,7 +72,7 @@ Caveat emptor (Grok is responsible)
 
 ## API Clients & Developer Tools
 
-- **hoppscotch/hoppscotch** — Open-source API development ecosystem (REST, GraphQL, WebSocket, SSE, Socket.IO, MQTT). Lightweight, self-hostable alternative to Postman/Insomnia. Web + Desktop + CLI. Installed at `skills/hoppscotch/`.
+- **hoppscotch/hoppscotch** — Open-source API development ecosystem (REST, GraphQL, WebSocket, SSE, Socket.IO, MQTT). Lightweight, self-hostable alternative to Postman/Insomnia. Web + Desktop + CLI. Installed at `skills/hoppscotch/`. Use for API design and testing during vibe coding (collections, environments, pre/post scripts, `hopp` CLI in CI).
 
 ## Related GitHub Users / Orgs
 
